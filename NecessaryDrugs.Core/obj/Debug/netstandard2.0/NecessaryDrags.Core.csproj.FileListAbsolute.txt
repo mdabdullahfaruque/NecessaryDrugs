@@ -1,0 +1,12 @@
+D:\Project\NecessaryDrags\NecessaryDrags.Core\bin\Debug\netstandard2.0\NecessaryDrags.Core.deps.json
+D:\Project\NecessaryDrags\NecessaryDrags.Core\bin\Debug\netstandard2.0\NecessaryDrags.Core.dll
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.csprojAssemblyReference.cache
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.AssemblyInfoInputs.cache
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.AssemblyInfo.cs
+D:\Project\NecessaryDrags\NecessaryDrags.Core\bin\Debug\netstandard2.0\NecessaryDrags.Core.pdb
+D:\Project\NecessaryDrags\NecessaryDrags.Core\bin\Debug\netstandard2.0\NecessaryDrags.Data.dll
+D:\Project\NecessaryDrags\NecessaryDrags.Core\bin\Debug\netstandard2.0\NecessaryDrags.Data.pdb
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.csproj.CoreCompileInputs.cache
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.csproj.CopyComplete
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.dll
+D:\Project\NecessaryDrags\NecessaryDrags.Core\obj\Debug\netstandard2.0\NecessaryDrags.Core.pdb
