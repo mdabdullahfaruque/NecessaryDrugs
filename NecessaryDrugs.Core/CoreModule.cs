@@ -23,6 +23,7 @@ namespace NecessaryDrugs.Core
 
         protected override void Load(ContainerBuilder builder)
         {
+            //DbContexts
             builder.RegisterType<MedicineStoreContext>()
                    .WithParameter("connectionString", _connectionString)
                    .WithParameter("migrationAssemblyName", _migrationAssemblyName)
@@ -31,15 +32,22 @@ namespace NecessaryDrugs.Core
                 .WithParameter("connectionString",_connectionString)
                 .WithParameter("migrationAssemblyName",_migrationAssemblyName)
                 .InstancePerLifetimeScope();
+            //Repositories
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<MedicineRepository>().As<IMedicineRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<MedicineCategoryRepository>().As<IMedicineCategoryRepository>()
+                .InstancePerLifetimeScope();
+            //Services
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<MedicineService>().As<IMedicineService>()
                 .InstancePerLifetimeScope();
+            //UnitOfWorks
             builder.RegisterType<MedicineStoreUnitOfWork>().As<IMedicineStoreUnitOfWork>()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
             base.Load(builder);
         }

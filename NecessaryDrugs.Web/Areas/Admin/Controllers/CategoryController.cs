@@ -5,19 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NecessaryDrugs.Web.Areas.Admin.Models;
+using NecessaryDrugs.Web.Models;
 
 namespace NecessaryDrugs.Web.Areas.Admin.Controllers
 {
-    [Area("Admin"),Authorize]
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            var model=new CategoryUpdateModel();
+            return View(model);
         }
         [HttpPost]
         public IActionResult Add(CategoryUpdateModel model)
@@ -26,7 +29,14 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             {
                 model.AddNewCaregory();
             }
-            return View();
+            return View(model);
+        }
+        public IActionResult GetCategories()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new CategoryViewModel();
+            var data = model.GetCategories(tableModel);
+            return Json(data);
         }
     }
 }

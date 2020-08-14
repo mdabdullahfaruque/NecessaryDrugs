@@ -16,3 +16,12 @@ D:\Project\NecessaryDrags\NecessaryDrugs.Data\obj\Debug\netstandard2.0\Necessary
 D:\Project\NecessaryDrags\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.csproj.CoreCompileInputs.cache
 D:\Project\NecessaryDrags\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.dll
 D:\Project\NecessaryDrags\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.pdb
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.0\NecessaryDrugs.Data.deps.json
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.0\NecessaryDrugs.Data.dll
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.0\NecessaryDrugs.Data.pdb
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.csprojAssemblyReference.cache
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.AssemblyInfoInputs.cache
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.AssemblyInfo.cs
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.csproj.CoreCompileInputs.cache
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.dll
+D:\Project\NecessaryDrugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.0\NecessaryDrugs.Data.pdb

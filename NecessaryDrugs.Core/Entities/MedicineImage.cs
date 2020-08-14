@@ -9,6 +9,7 @@ namespace NecessaryDrugs.Core.Entities
         public int Id { get; set; }
         public string Url { get; set; }
         public string AlternativeText { get; set; }
-        public Medicine Medicine { get; set; }
+        public Medicine Medicine{ get; set; }
+        public int MedicineId { get; set; }
     }
 }

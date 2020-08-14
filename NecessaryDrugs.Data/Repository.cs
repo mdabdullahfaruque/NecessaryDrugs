@@ -23,19 +23,80 @@ namespace NecessaryDrugs.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "", bool isTrackingOff = false)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
+            IOrderedQueryable<T>> orderBy = null, string includeProperties = "", bool isTrackingOff = false)
         {
-            throw new NotImplementedException();
+            var query = _dbSet.AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            IQueryable<T> result = null;
+
+            if (orderBy != null)
+            {
+                result = orderBy(query);
+            }
+
+            if (isTrackingOff)
+                return result?.AsNoTracking().ToList();
+            else
+                return result?.ToList(); 
         }
 
-        public IEnumerable<T> Get(out int total, out int totalDisplay, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
+        public IEnumerable<T> Get(out int total, out int totalDisplay,
+            Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
+                IOrderedQueryable<T>> orderBy = null, string includeProperties = "", 
+            int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
         {
-            throw new NotImplementedException();
+            var query = _dbSet.AsQueryable();
+            total = query.Count();
+            totalDisplay = total;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+                totalDisplay = query.Count();
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            IQueryable<T> result = null;
+
+            if (orderBy != null)
+            {
+                result = orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                result = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+
+            if (isTrackingOff)
+                return result?.AsNoTracking().ToList();
+            else
+                return result?.ToList();
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbSet.Find(id);
+        }
+        public IEnumerable<T> GetAll()
+        {
+            return _dbSet.AsEnumerable();
         }
 
         public int GetCount(Expression<Func<T, bool>> filter = null)

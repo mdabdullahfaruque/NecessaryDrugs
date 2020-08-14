@@ -58,9 +58,15 @@ namespace NecessaryDrugs.Web.Controllers
 
             if (ModelState.IsValid)
             {
+
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                //    lockoutOnFailure: true);
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -89,8 +95,8 @@ namespace NecessaryDrugs.Web.Controllers
         public async Task<ActionResult> Register(string returnUrl = null)
         {
             var model = new RegisterModel();
-            model.ReturnUrl = returnUrl;
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            model.ReturnUrl = returnUrl;
             return View(model);
         }
         [HttpPost]
@@ -117,15 +123,21 @@ namespace NecessaryDrugs.Web.Controllers
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(model.ReturnUrl);
-                    }
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    //return LocalRedirect(model.ReturnUrl);
+                    //}
+
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(model.ReturnUrl);
                 }
                 foreach (var error in result.Errors)
                 {
@@ -135,6 +147,10 @@ namespace NecessaryDrugs.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public IActionResult ConfirmEmail()
+        {
+            return View();
         }
     }
 }

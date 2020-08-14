@@ -1077,11 +1077,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\NecessaryDrags\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
+      "projectUniqueName": "D:\\Project\\NecessaryDrugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
       "projectName": "NecessaryDrugs.Data",
-      "projectPath": "D:\\Project\\NecessaryDrags\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
+      "projectPath": "D:\\Project\\NecessaryDrugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
       "packagesPath": "C:\\Users\\Arman Abdullah\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\NecessaryDrags\\NecessaryDrugs.Data\\obj\\",
+      "outputPath": "D:\\Project\\NecessaryDrugs\\NecessaryDrugs\\NecessaryDrugs.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1136,7 +1136,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

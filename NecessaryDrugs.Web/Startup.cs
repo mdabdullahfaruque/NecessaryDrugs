@@ -51,7 +51,7 @@ namespace NecessaryDrugs.Web
             options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationAssemblyName)));
 
             services.AddIdentity<IdentityUser, IdentityRole>
-                (options => options.SignIn.RequireConfirmedAccount = true)
+                (options => options.SignIn.RequireConfirmedAccount = false)
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

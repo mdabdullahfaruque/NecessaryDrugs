@@ -15,7 +15,7 @@ namespace NecessaryDrugs.Core.Entities
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
-        public IList<MedicineImage> Images { get; set; }
+        public MedicineImage Image { get; set; }
         public IList<MedicineCategory> Categories { get; set; }
         public Discount PriceDiscount { get; set; }
     }

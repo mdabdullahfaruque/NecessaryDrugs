@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0PAWcRM6lSVQq2ujV2cBFromEC/9iQ5D0gezXYYb1g3D3EO7170eQGfDPamY7VsC3BaX60qTShg+1apnFfm78w==",
+  "dgSpecHash": "/5GPOghZQ2+UC/PDmuhHOW6OSzksmIxWBxRX7W0oox0H+DxRWAe58gnhHhBrDLQUh/zn6+j9Fj8Pnwi47XsuUA==",
   "success": true,
-  "projectFilePath": "D:\\Project\\NecessaryDrags\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
+  "projectFilePath": "D:\\Project\\NecessaryDrugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arman Abdullah\\.nuget\\packages\\autofac\\5.2.0\\autofac.5.2.0.nupkg.sha512",
     "C:\\Users\\Arman Abdullah\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

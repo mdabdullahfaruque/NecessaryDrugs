@@ -32,7 +32,7 @@ namespace NecessaryDrugs.Core.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Medicine>()
-                .HasMany(p => p.Images)
+                .HasOne(p => p.Image)
                 .WithOne(i => i.Medicine);
 
             builder.Entity<Medicine>()
