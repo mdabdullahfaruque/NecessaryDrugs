@@ -12,6 +12,7 @@ namespace NecessaryDrugs.Core.UnitOfWorks
     {
         IMedicineRepository MedicineRepository { get; set; }
         ICategoryRepository CategoryRepository { get; set; }
+        IStockRepository StockRepository { get; set; }
         IMedicineCategoryRepository MedicineCategoryRepository { get; set; }
     }
 }

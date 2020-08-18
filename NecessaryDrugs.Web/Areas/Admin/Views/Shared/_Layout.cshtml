@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -47,7 +48,7 @@
             </ul>
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
+            <!--<form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -56,20 +57,20 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>-->
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
+            <!--<ul class="navbar-nav ml-auto">-->
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a href="#" class="dropdown-item">-->
                             <!-- Message Start -->
-                            <div class="media">
+                            <!--<div class="media">
                                 <img src="/admin/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -79,13 +80,13 @@
                                     <p class="text-sm">Call me whenever you can...</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- Message End -->
-                        </a>
+                        <!--</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="#" class="dropdown-item">-->
                             <!-- Message Start -->
-                            <div class="media">
+                            <!--<div class="media">
                                 <img src="/admin/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -95,13 +96,13 @@
                                     <p class="text-sm">I got your message bro</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- Message End -->
-                        </a>
+                        <!--</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="#" class="dropdown-item">-->
                             <!-- Message Start -->
-                            <div class="media">
+                            <!--<div class="media">
                                 <img src="/admin/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -111,15 +112,15 @@
                                     <p class="text-sm">The subject goes here</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- Message End -->
-                        </a>
+                        <!--</a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li>-->
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
@@ -150,7 +151,7 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
-            </ul>
+            </ul>-->
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
@@ -181,7 +182,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    Medicine Category
+                                    Category Management
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -204,7 +205,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    Medicine
+                                    Medicine Management
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -219,6 +220,152 @@
                                     <a href="~/admin/medicine/add" class="nav-link">
                                         <i class="fas fa-plus"></i>
                                         <p>Add Medicine</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Stock Magement
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/stock/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Stocks</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Roles Magement
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/role/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>All Roles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/admin/role/add" class="nav-link">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Add Role</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Parchase Management
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parchase History</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/add" class="nav-link">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Add Parchase</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Order Management
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Orders</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    Payment Management
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Payment History</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-list"></i>
+                                <p>
+                                    User Management
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/user/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>All Users</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Admins</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sales Executives</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Suppliers</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/admin/medicine/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Normal Users</p>
                                     </a>
                                 </li>
                             </ul>
@@ -253,6 +400,21 @@
             <section class="content">
                 @RenderSection("Notification", false)
                 @RenderBody()
+                <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- /.content -->
         </div>
@@ -299,7 +461,7 @@
     <!-- overlayScrollbars -->
     <script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="/admin/js/adminlte.js"></script>
+    <script src="/admin/js/adminlte.js" asp-append-version="true"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

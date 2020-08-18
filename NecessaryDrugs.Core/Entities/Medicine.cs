@@ -18,5 +18,6 @@ namespace NecessaryDrugs.Core.Entities
         public MedicineImage Image { get; set; }
         public IList<MedicineCategory> Categories { get; set; }
         public Discount PriceDiscount { get; set; }
+        public Stock Stock { get; set; }
     }
 }

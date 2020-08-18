@@ -14,5 +14,7 @@ namespace NecessaryDrugs.Core.Contexts
         DbSet<MedicineImage> MedicineImages { get; set; }
         DbSet<FixedAmountDiscount> FixedAmountDiscounts { get; set; }
         DbSet<PercentageDiscount> PercentageDiscounts { get; set; }
+        DbSet<Stock> Stocks { get; set; }
+        DbSet<NormalUser> Users { get; set; }
     }
 }

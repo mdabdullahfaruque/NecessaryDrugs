@@ -10,6 +10,22 @@ namespace NecessaryDrugs.Web.Models
     public class RegisterModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "PhoneNumber")]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Adress")]
+        public string Adress { get; set; }
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

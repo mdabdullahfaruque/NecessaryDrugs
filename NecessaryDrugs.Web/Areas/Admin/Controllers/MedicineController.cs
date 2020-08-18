@@ -79,8 +79,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new MedicineViewModel();
-
-            
             var data = model.GetMedicines(tableModel);
             return Json(data);
         }

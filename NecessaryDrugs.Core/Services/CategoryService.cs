@@ -26,6 +26,19 @@ namespace NecessaryDrugs.Core.Services
             }
         }
 
+        public void DeleteCategory(int id)
+        {
+            _medicineStoreUnitOfWork.CategoryRepository.Remove(id);
+            _medicineStoreUnitOfWork.Save();
+        }
+
+        public void EditCategory(Category category)
+        {
+            var oldCategory = _medicineStoreUnitOfWork.CategoryRepository.GetById(category.Id);
+            oldCategory.Name = category.Name;
+            _medicineStoreUnitOfWork.Save();
+        }
+
         public IEnumerable<Category> GetCategories(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
             return _medicineStoreUnitOfWork.CategoryRepository.Get(
@@ -36,6 +49,11 @@ namespace NecessaryDrugs.Core.Services
                 pageSize,
                 true
                 );
+        }
+
+        public Category GetCategoy(int id)
+        {
+            return _medicineStoreUnitOfWork.CategoryRepository.GetById(id);
         }
     }
 }

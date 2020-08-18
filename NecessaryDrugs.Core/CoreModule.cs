@@ -32,6 +32,7 @@ namespace NecessaryDrugs.Core
                 .WithParameter("connectionString",_connectionString)
                 .WithParameter("migrationAssemblyName",_migrationAssemblyName)
                 .InstancePerLifetimeScope();
+
             //Repositories
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
@@ -39,11 +40,17 @@ namespace NecessaryDrugs.Core
                 .InstancePerLifetimeScope();
             builder.RegisterType<MedicineCategoryRepository>().As<IMedicineCategoryRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<StockRepository>().As<IStockRepository>()
+                .InstancePerLifetimeScope();
+
             //Services
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<MedicineService>().As<IMedicineService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<StockService>().As<IStockService>()
+                .InstancePerLifetimeScope();
+
             //UnitOfWorks
             builder.RegisterType<MedicineStoreUnitOfWork>().As<IMedicineStoreUnitOfWork>()
                 .WithParameter("connectionString", _connectionString)

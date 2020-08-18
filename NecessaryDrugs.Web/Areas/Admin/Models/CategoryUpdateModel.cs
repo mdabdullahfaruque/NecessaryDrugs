@@ -12,9 +12,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
 {
     public class CategoryUpdateModel : BaseModel
     {
+        ICategoryService _categoryService;
         public int Id { get; set; }
         public string Name { get; set; }
-        ICategoryService _categoryService;
+
         public CategoryUpdateModel()
         {
             _categoryService = Startup.AutofacContainer.Resolve<ICategoryService>();
@@ -25,7 +26,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         }
         
 
-        internal void AddNewCaregory()
+        internal void AddCaregory()
         {
             try
             {
@@ -52,5 +53,49 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             }
 
         }
+
+        internal void EditCaregory()
+        {
+            try
+            {
+                _categoryService.EditCategory(new Category
+                {
+                    Id = this.Id,
+                    Name = this.Name
+                });
+                Notification = new NotificationModel("Success!",
+                    "Category edited successfully.",
+                    Notificationtype.Success);
+            }
+            catch (InvalidOperationException iex)
+            {
+                Notification = new NotificationModel("Failed!",
+                    "Failed to edit category, please provide valid name.",
+                    Notificationtype.Fail);
+            }
+            catch (Exception ex)
+            {
+                Notification = new NotificationModel("Failed!",
+                    "Failed to edit category, please try again.",
+                    Notificationtype.Fail);
+            }
+        }
+
+        internal void Delete(int id)
+        {
+            _categoryService.DeleteCategory(id);
+        }
+
+        public void Load(int id)
+        {
+            var category = _categoryService.GetCategoy(id);
+            if (category != null)
+            {
+                Id = category.Id;
+                Name = category.Name;
+            }
+        }
+
     }
+
 }

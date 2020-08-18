@@ -11,19 +11,21 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using NecessaryDrugs.Core.Entities;
+using NecessaryDrugs.Web.Areas.Admin.Models;
 
 namespace NecessaryDrugs.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<NormalUser> _signInManager;
+        private readonly UserManager<NormalUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<NormalUser> userManager,
+            SignInManager<NormalUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -59,7 +61,6 @@ namespace NecessaryDrugs.Web.Controllers
             if (ModelState.IsValid)
             {
 
-                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
@@ -106,38 +107,44 @@ namespace NecessaryDrugs.Web.Controllers
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new NormalUser { UserName = model.Email, Email = model.Email, 
+                    PhoneNumber=model.PhoneNumber,FirstName=model.FirstName,LastName=model.LastName,Adress=model.Adress };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = model.ReturnUrl },
-                        protocol: Request.Scheme);
+                    var roleResult = await _userManager.AddToRoleAsync(user, "Normal User");
+                    if (roleResult.Succeeded)
+                    {
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code = code, returnUrl = model.ReturnUrl },
+                            protocol: Request.Scheme);
 
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
-                    //}
-                    //else
-                    //{
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    //return LocalRedirect(model.ReturnUrl);
-                    //}
-
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                        await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(model.ReturnUrl);
+                        //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        //{
+                        //    return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
+                        //}
+                        //else
+                        //{
+                        //    await _signInManager.SignInAsync(user, isPersistent: false);
+                        //    //return LocalRedirect(model.ReturnUrl);
+                        //}
+
+                        await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(model.ReturnUrl);
+                    }
                 }
                 foreach (var error in result.Errors)
                 {
@@ -152,5 +159,6 @@ namespace NecessaryDrugs.Web.Controllers
         {
             return View();
         }
+        
     }
 }

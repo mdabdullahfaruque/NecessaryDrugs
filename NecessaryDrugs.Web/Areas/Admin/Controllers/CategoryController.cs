@@ -27,7 +27,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.AddNewCaregory();
+                model.AddCaregory();
             }
             return View(model);
         }
@@ -37,6 +37,29 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             var model = new CategoryViewModel();
             var data = model.GetCategories(tableModel);
             return Json(data);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = new CategoryUpdateModel();
+            model.Load(id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(CategoryUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.EditCaregory();
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var model = new CategoryUpdateModel();
+            model.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

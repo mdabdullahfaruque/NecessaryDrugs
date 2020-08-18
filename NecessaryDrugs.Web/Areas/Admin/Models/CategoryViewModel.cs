@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NecessaryDrugs.Web.Areas.Admin.Models
 {
-    public class CategoryViewModel
+    public class CategoryViewModel : BaseModel
     {
         private ICategoryService _categoryService;
         public CategoryViewModel()
@@ -38,7 +38,8 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                         select new string[]
                         {
                             record.Id.ToString(),
-                            record.Name
+                            record.Name,
+                            record.Id.ToString()
                         }
                     ).ToArray()
 

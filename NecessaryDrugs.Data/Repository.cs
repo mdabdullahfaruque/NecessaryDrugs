@@ -20,7 +20,8 @@ namespace NecessaryDrugs.Data
 
         public void Edit(T entityToUpdate)
         {
-            throw new NotImplementedException();
+            _dbSet.Attach(entityToUpdate);
+            _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
@@ -101,22 +102,34 @@ namespace NecessaryDrugs.Data
 
         public int GetCount(Expression<Func<T, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            var query = _dbSet.AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Count();
         }
 
         public void Remove(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(_dbSet.Where(filter));
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var entityToDelete = _dbSet.Find(id);
+            Remove(entityToDelete);
         }
 
         public void Remove(T entityToDelete)
         {
-            throw new NotImplementedException();
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                _dbSet.Attach(entityToDelete);
+            }
+            _dbSet.Remove(entityToDelete);
         }
     }
 }

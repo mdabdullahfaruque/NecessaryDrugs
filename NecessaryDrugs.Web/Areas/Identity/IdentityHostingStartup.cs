@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NecessaryDrugs.Web.Data;
 
 [assembly: HostingStartup(typeof(NecessaryDrugs.Web.Areas.Identity.IdentityHostingStartup))]
 namespace NecessaryDrugs.Web.Areas.Identity

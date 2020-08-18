@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using NecessaryDrugs.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +17,7 @@ using Autofac.Extensions.DependencyInjection;
 using NecessaryDrugs.Core;
 using Microsoft.Extensions.Logging;
 using NecessaryDrugs.Data;
+using NecessaryDrugs.Core.Entities;
 
 namespace NecessaryDrugs.Web
 {
@@ -44,16 +44,13 @@ namespace NecessaryDrugs.Web
         public void ConfigureServices(IServiceCollection services)
         {
            string connectionString = Configuration.GetConnectionString(connectionStringName);
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationAssemblyName)));
             services.AddDbContext<MedicineStoreContext>(options =>
             options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationAssemblyName)));
 
-            services.AddIdentity<IdentityUser, IdentityRole>
+            services.AddIdentity<NormalUser, ApplicationRole>
                 (options => options.SignIn.RequireConfirmedAccount = false)
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<MedicineStoreContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
@@ -74,7 +71,7 @@ namespace NecessaryDrugs.Web
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -94,6 +91,8 @@ namespace NecessaryDrugs.Web
                 options.Cookie.IsEssential = true;
             }
             );
+            services.AddSingleton<UserManager<NormalUser>>();
+            services.AddSingleton<SignInManager<NormalUser>>();
             services.AddControllersWithViews();
             services.AddRazorPages()
             .AddRazorRuntimeCompilation();

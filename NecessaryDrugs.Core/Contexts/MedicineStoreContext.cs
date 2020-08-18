@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NecessaryDrugs.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,9 @@ using System.Text;
 
 namespace NecessaryDrugs.Core.Contexts
 {
-    public class MedicineStoreContext : DbContext, IMedicineStoreContext
+    public class MedicineStoreContext : IdentityDbContext<NormalUser, ApplicationRole, string, IdentityUserClaim<string>,
+    ApplicationUserRole, IdentityUserLogin<string>,
+    IdentityRoleClaim<string>, IdentityUserToken<string>>,IMedicineStoreContext
     {
         private string _connectionString;
         private string _migrationAssemblyName;
@@ -52,6 +56,26 @@ namespace NecessaryDrugs.Core.Contexts
                 .WithMany(c => c.Categories)
                 .HasForeignKey(pc => pc.CategoryId);
 
+            builder.Entity<Medicine>()
+                .HasOne(m => m.Stock)
+                .WithOne(s => s.Medicine);
+
+            builder.Entity<ApplicationUserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+
             base.OnModelCreating(builder);
         }
 
@@ -61,5 +85,6 @@ namespace NecessaryDrugs.Core.Contexts
         public DbSet<MedicineCategory> MedicineCategories { get; set; }
         public DbSet<FixedAmountDiscount> FixedAmountDiscounts { get; set; }
         public DbSet<PercentageDiscount> PercentageDiscounts { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
     }
 }
