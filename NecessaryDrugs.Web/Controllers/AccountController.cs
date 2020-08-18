@@ -70,8 +70,21 @@ namespace NecessaryDrugs.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(model.ReturnUrl);
+                    if (string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    {
+                        return LocalRedirect(model.ReturnUrl);
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    //return LocalRedirect(model.ReturnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
