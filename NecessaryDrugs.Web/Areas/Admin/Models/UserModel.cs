@@ -24,6 +24,8 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         public string Id { get; set; }
         public String Name { get; set; }
         public string Email { get; set; }
+        public string Roles { get; set; }
+
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         //internal object GetAllUsers(DataTablesAjaxRequestModel tableModel)
@@ -58,26 +60,35 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
 
 
 
-        public IEnumerable<UserModel> GetUsers()
+        public async Task<IEnumerable<UserModel>> GetUsers()
         {
             var allData = _userManager.Users.ToList();
             var userList = new List<UserModel>();
             foreach (var user in allData)
             {
+                string roleString = null;
+                var roles = await _userManager.GetRolesAsync(user);
+                foreach (string role in roles)
+                {
+                    roleString = roleString + ", " + role;
+                    roleString=roleString.TrimStart(',',' ');
+                }
                 userList.Add(new UserModel
                 {
                     Id = user.Id,
                     Name = user.FirstName+" "+user.LastName,
                     Email = user.Email,
+                    Roles=roleString,
                     PhoneNumber = user.PhoneNumber
                 });
+                
             }
             return userList;
         }
 
         //public string GetRoles(NormalUser user)
         //{
-        //    string roleString = null;
+        //    //string roleString = null;
         //    //IEnumerable<ApplicationUserRole> roles = user.UserRoles;
 
         //    //foreach (ApplicationUserRole role in roles)
@@ -86,18 +97,17 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         //    //}
         //    //var roles = await _userManager.GetRolesAsync(user);
         //    //Task<IList<string>> roles;
-        //    //using (roles = _userManager.GetRolesAsync(user))
-        //    //{
-        //    //    foreach (string role in roles.Result)
-        //    //    {
-        //    //        roleString = roleString + " " + role;
-        //    //    }
-        //    //}
+        //    var roles = await _userManager.GetRolesAsync(user);
+        //    foreach (string role in roles.Result)
+        //    {
+        //        roleString = roleString + " " + role;
+        //    }
+            
         //    var Users = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
 
 
-        //    ////IList<string> roles = null;
-        //    ////var roles =  _userManager.GetRolesAsync(user).Result;
+        //    //IList<string> roles = null;
+        //    //var roles =  _userManager.GetRolesAsync(user).Result;
 
         //    return roleString.TrimStart();
         //}

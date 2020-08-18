@@ -34,11 +34,12 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             _logger = logger;
             _emailSender = emailSender;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //var data = GetUsers();
             var model = new UserModel();
-            return View(model.GetUsers());
+            var users = await model.GetUsers();
+            return View(users);
         }
         [HttpGet]
         public async Task<IActionResult> Manageroles(string userId)
