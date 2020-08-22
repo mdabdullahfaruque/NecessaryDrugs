@@ -37,6 +37,10 @@ namespace NecessaryDrugs.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Login(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/Home");
+            }
             var model = new LoginModel();
             if (!string.IsNullOrEmpty(model.ErrorMessage))
             {
@@ -67,7 +71,7 @@ namespace NecessaryDrugs.Web.Controllers
                 //    lockoutOnFailure: true);
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
@@ -108,6 +112,10 @@ namespace NecessaryDrugs.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Register(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/Home");
+            }
             var model = new RegisterModel();
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             model.ReturnUrl = returnUrl;

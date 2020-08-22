@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\TStock\**" />
+    <Content Remove="Areas\Admin\Views\TStock\**" />
+    <EmbeddedResource Remove="Areas\Admin\Views\TStock\**" />
+    <None Remove="Areas\Admin\Views\TStock\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Areas\Identity\Pages\Account\Login.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Register.cshtml.cs" />
   </ItemGroup>
@@ -36,6 +43,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\TStock\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

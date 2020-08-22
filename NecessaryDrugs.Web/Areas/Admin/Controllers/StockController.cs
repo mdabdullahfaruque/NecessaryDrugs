@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using NecessaryDrugs.Web.Areas.Admin.Models;
 
@@ -54,9 +55,18 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
                 {
                     model.UpdateStock(id);
                 }
-                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAll", model.GetAllStocks()) });
+                return Json(new { isValid = true, html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", model.GetAllStocks()) });
             }
-            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEdit", model) });
+            return Json(new { isValid = false, html = Helper<StockController>.RenderRazorViewToString(this, "AddOrEdit", model) });
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var model = new StockUpdateModel();
+
+            model.Delete(id);
+            return Json(new { html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", model.GetAllStocks()) });
         }
     }
 }

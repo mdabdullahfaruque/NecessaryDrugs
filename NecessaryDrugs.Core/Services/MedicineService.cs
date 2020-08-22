@@ -32,12 +32,13 @@ namespace NecessaryDrugs.Core.Services
             Category category = GetCategoryById(CateId);
             _medicineStoreUnitOfWork.MedicineCategoryRepository.Add(new MedicineCategory
             {
-                CategoryId=CateId,
-                Category=category,
-                MedicineId=medicine.Id,
-                Medicine=medicine
+                CategoryId = CateId,
+                Category = category,
+                MedicineId = medicine.Id,
+                Medicine = medicine
             });
             _medicineStoreUnitOfWork.Save();
+
         }
         public Category GetCategoryById(int catId)
         {
@@ -60,7 +61,7 @@ namespace NecessaryDrugs.Core.Services
                 );
         }
 
-        public string GetCategoryListForAMedicine(IList<MedicineCategory> medicineCategories)
+        public string GetCategoryListAsStringForAMedicine(IList<MedicineCategory> medicineCategories)
         {
             string allCategoryName="";
             foreach(MedicineCategory medicineCategory in medicineCategories)
@@ -69,6 +70,59 @@ namespace NecessaryDrugs.Core.Services
                 allCategoryName = allCategoryName +" , "+ category.Name;
             }
             return allCategoryName.TrimStart(' ',',');
+        }
+
+        public Medicine GetMedicine(int id)
+        {
+            return _medicineStoreUnitOfWork.MedicineRepository.GetByIdWithIncludeProperty(x => x.Id == id, "Categories,PriceDiscount,Image");
+        }
+        public IEnumerable<Category> GetCategoryListForAMedicine(IList<MedicineCategory> medicineCategories)
+        {
+
+            var categoryList =new List<Category>(); 
+            foreach (MedicineCategory medicineCategory in medicineCategories)
+            {
+                var category = _medicineStoreUnitOfWork.CategoryRepository.GetById(medicineCategory.CategoryId);
+                categoryList.Add(category);
+            }
+            return categoryList;
+        }
+
+        public void SaveInDbContext()
+        {
+            _medicineStoreUnitOfWork.Save();
+        }
+
+        public void DeleteMedicine(int id)
+        {
+            _medicineStoreUnitOfWork.MedicineRepository.Remove(id);
+            _medicineStoreUnitOfWork.Save();
+        }
+
+        public void EditMedicine(Medicine medicine)
+        {
+            var oldMedicine= GetMedicine(medicine.Id);
+            oldMedicine.Name = medicine.Name;
+            oldMedicine.Description = medicine.Description;
+            oldMedicine.Price = medicine.Price;
+            oldMedicine.PriceDiscount = medicine.PriceDiscount;
+            if (medicine.Image.Url!= null)
+            {
+                oldMedicine.Image = medicine.Image;
+            }
+            _medicineStoreUnitOfWork.Save();
+        }
+
+        public string GetDiscountAsString(Discount priceDiscount)
+        {
+            if(priceDiscount.GetType().Name== "FixedAmountDiscount")
+            {
+                return priceDiscount.Amount.ToString();
+            }
+            else
+            {
+                return priceDiscount.Amount.ToString() + " % ";
+            }
         }
     }
 }

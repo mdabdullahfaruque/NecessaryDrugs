@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Web.Areas.Admin.Models;
@@ -41,11 +44,25 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             var users = await model.GetUsers();
             return View(users);
         }
+       
+        // POST: Transaction/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(string id)
+        {
+            var model = new UserModel();
+            model.Delete(id);
+            return RedirectToAction("Index", new { id });
+            //Note: After clicking delete, the operation will be done, but the page will not be refreshed.
+
+            //return Json(new { html = Helper<UserController>.RenderRazorViewToString(this, "Index", model.GetUsers() ) });
+            //return Json(new { html = Helper<UserController>.RenderRazorViewToString(this, "Index", model.GetUsers()) });
+        }
+
         [HttpGet]
         public async Task<IActionResult> Manageroles(string userId)
         {
             ViewBag.userId = userId;
-
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -109,6 +126,23 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
 
             return RedirectToAction("Index", new { Id = userId });
         }
+
+        //[HttpGet]
+        //public ActionResult Edit(string id)
+        //{
+        //    var model = new UserModel();
+        //    model.Load(id);
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //public  IActionResult Edit(UserModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        model.EditUser();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         //public IActionResult GetUsers()
         //{

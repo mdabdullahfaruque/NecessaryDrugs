@@ -76,6 +76,11 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             }
         }
 
+        internal void Delete(int id)
+        {
+            _stockService.DeleteStock(id);
+        }
+
         internal void UpdateStock(int id)
         {
             try

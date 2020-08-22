@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NecessaryDrugs.Core.Contexts;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Data;
 using System;
@@ -11,7 +12,7 @@ namespace NecessaryDrugs.Core.Repositories
     {
         public MedicineCategoryRepository(DbContext dbContext): base(dbContext)
         {
-
+            
         }
     }
 }

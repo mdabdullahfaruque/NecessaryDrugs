@@ -36,6 +36,8 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         public string DisountType { get; set; }
         public double AmountOrPercentage { get; set; }
         public string ReturnUrl { get; set; }
+        public string Url { get; set; }
+        public List<MedicineCategoryViewModel> medCatModel { get; set; }
         public MedicineUpdateModel()
         {
             _medicineService = Startup.AutofacContainer.Resolve<IMedicineService>(); 
@@ -44,7 +46,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         {
             _medicineService = medicineService;
         }
-        internal void AddNewMedicine(string url)
+        internal void AddNewMedicine()
         {
             if (DisountType == "FixedAmountDiscount")
             {
@@ -54,16 +56,13 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             {
                 Discount = new PercentageDiscount { Amount = AmountOrPercentage };
             }
-            
-            
-
             try
             {
                 var medicine = new Medicine
                 {
                     Name = Name,
                     Description = Description,
-                    Image = new MedicineImage { Url = url },
+                    Image = new MedicineImage { Url = Url },
                     Price = Price,
                     PriceDiscount = Discount
                 };
@@ -85,5 +84,56 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             }
         }
 
+        internal void Load(int id)
+        {
+            var medicine = _medicineService.GetMedicine(id);
+            if (medicine != null)
+            {
+                Id = medicine.Id;
+                Name = medicine.Name;
+                Description = medicine.Description;
+                Price = medicine.Price;
+                AmountOrPercentage = medicine.PriceDiscount.Amount;
+                DisountType = medicine.PriceDiscount.GetType().Name;
+            }
+        }
+
+        internal void EditMedicine()
+        {
+            if (DisountType == "FixedAmountDiscount")
+            {
+                Discount = new FixedAmountDiscount { Amount = AmountOrPercentage };
+            }
+            else
+            {
+                Discount = new PercentageDiscount { Amount = AmountOrPercentage };
+            }
+            try
+            {
+                _medicineService.EditMedicine(new Medicine
+                {
+                    Id=Id,
+                    Name = Name,
+                    Description = Description,
+                    Image = new MedicineImage { Url = Url },
+                    Price = Price,
+                    PriceDiscount = Discount
+                });
+                Notification = new NotificationModel("Success!",
+                    "Medicine edited successfully.",
+                    Notificationtype.Success);
+            }
+            catch (InvalidOperationException iex)
+            {
+                Notification = new NotificationModel("Failed!",
+                    "Failed to edit medicine, please provide valid name.",
+                    Notificationtype.Fail);
+            }
+        }
+
+        internal void Delete(int id)
+        {
+            _medicineService.DeleteMedicine(id);
+        }
     }
 }

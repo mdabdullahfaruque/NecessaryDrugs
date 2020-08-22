@@ -18,6 +18,7 @@ namespace NecessaryDrugs.Data
             IOrderedQueryable<T>> orderBy = null, string includeProperties = "", int pageIndex = 1, int pageSize = 10, 
             bool isTrackingOff = false);
         T GetById(int id);
+        T GetByIdWithIncludeProperty(Expression<Func<T, bool>> filter = null, string includeProperties = "");
         IEnumerable<T> GetAll();
         int GetCount(Expression<Func<T, bool>> filter = null);
         void Remove(Expression<Func<T, bool>> filter);

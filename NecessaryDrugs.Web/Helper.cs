@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NecessaryDrugs.Web.Areas.Admin.Controllers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NecessaryDrugs.Web
 {
-    public class Helper
+    public class Helper<T> where T:Controller
     {
 
-        public static string RenderRazorViewToString(StockController controller, string viewName, object model = null)
+        public static string RenderRazorViewToString(T controller, string viewName, object model = null)
         {
             controller.ViewData.Model = model;
             using (var sw = new StringWriter())

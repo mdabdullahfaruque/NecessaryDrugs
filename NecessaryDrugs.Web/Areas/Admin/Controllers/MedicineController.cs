@@ -47,7 +47,8 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string fileName = UploadedFile(model);
-                model.AddNewMedicine(fileName);
+                model.Url = fileName;
+                model.AddNewMedicine();
             }
             var Categories = model.GetAllCategory();
             model.Categories = (from r in Categories
@@ -65,15 +66,68 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             if (model.Image != null)
             {
                 string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "admin\\img\\");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.Name+".jpg";
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                if (model.Image.Name != null)
                 {
-                    model.Image.CopyTo(fileStream);
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.Name + ".jpg";
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        model.Image.CopyTo(fileStream);
+                    }
                 }
+                else
+                {
+                    return null;
+                }
+                
             }
             return uniqueFileName;
         }
+        public IActionResult Edit(int id)
+        {
+            var model = new MedicineUpdateModel();
+            var MedicineCatModel = new MedicineCategoryViewModel();
+            model.medCatModel = MedicineCatModel.GetSelectedMedicineCategories(id);
+            model.Load(id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(MedicineUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var medCatModel = new MedicineCategoryViewModel();
+                medCatModel.SetSelectedCategory(model.medCatModel, model.Id);
+                string fileName = UploadedFile(model);
+                model.Url = fileName;
+                model.EditMedicine();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var model = new MedicineUpdateModel();
+            model.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        //[HttpGet]
+        //public  IActionResult ManageCategories(int medId)
+        //{
+        //    ViewBag.id = medId;
+        //    var model = new MedicineCategoryViewModel();
+        //    var selectedCategoryList=model.GetSelectedMedicineCategories(medId);
+        //    return View(selectedCategoryList);
+        //}
+        //[HttpPost]
+        //public IActionResult ManageCategories(List<MedicineCategoryViewModel> modelList, int medicineId)
+        //{
+        //    var model = new MedicineCategoryViewModel();
+        //    model.SetSelectedCategory( modelList, medicineId);
+        //    return RedirectToAction("Edit", new { id = medicineId });
+        //}
 
         public IActionResult GetMedicines()
         {

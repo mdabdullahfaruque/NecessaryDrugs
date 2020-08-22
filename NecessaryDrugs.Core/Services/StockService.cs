@@ -27,6 +27,12 @@ namespace NecessaryDrugs.Core.Services
             }
         }
 
+        public void DeleteStock(int id)
+        {
+            _medicineStoreUnitOfWork.StockRepository.Remove(id);
+            _medicineStoreUnitOfWork.Save();
+        }
+
         public void EditStock(Stock stock)
         {
             var oldStock = _medicineStoreUnitOfWork.StockRepository.GetById(stock.Id);

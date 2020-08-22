@@ -80,7 +80,7 @@ namespace NecessaryDrugs.Web
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Identity/Account/Login";
+                options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
@@ -91,6 +91,12 @@ namespace NecessaryDrugs.Web
                 options.Cookie.IsEssential = true;
             }
             );
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("InternalOfficials", policy =>
+                    policy
+                    .RequireRole("Admin", "Support"));
+            });
             services.AddSingleton<UserManager<NormalUser>>();
             services.AddSingleton<SignInManager<NormalUser>>();
             services.AddControllersWithViews();

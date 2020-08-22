@@ -12,7 +12,7 @@ using NecessaryDrugs.Web.Models;
 
 namespace NecessaryDrugs.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"),Authorize(Roles ="Admin")]
     public class RoleController : Controller
     {
         private readonly UserManager<NormalUser> _userManager;

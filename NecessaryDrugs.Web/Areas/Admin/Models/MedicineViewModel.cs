@@ -2,6 +2,7 @@
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
 using NecessaryDrugs.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,7 +40,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 tableModel.SearchText,
                 out total,
                 out totalFiltered);
-
             return new
             {
                 recordsTotal = total,
@@ -51,9 +51,11 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                             record.Image.Url,
                             record.Name,
                             record.Description,
-                            _medicineService.GetCategoryListForAMedicine(record.Categories),
+                            _medicineService.GetCategoryListAsStringForAMedicine(record.Categories),
                             record.Price.ToString(),
-                            record.PriceDiscount.GetType().Name + " : " + record.PriceDiscount.Amount.ToString(),
+                            _medicineService.GetDiscountAsString(record.PriceDiscount),
+                            //record.PriceDiscount.GetType().Name,
+                            //record.PriceDiscount.Amount.ToString(),
                             record.Id.ToString()
                         }
                     ).ToList()

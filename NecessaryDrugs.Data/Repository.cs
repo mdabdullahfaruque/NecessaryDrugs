@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace NecessaryDrugs.Data
@@ -16,14 +17,17 @@ namespace NecessaryDrugs.Data
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
         }
-        public void Add(T entity) => _dbSet.Add(entity);
+        public void Add(T entity) 
+        {
+                _dbSet.Add(entity);
+        }
 
         public void Edit(T entityToUpdate)
         {
             _dbSet.Attach(entityToUpdate);
             _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
-
+        
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
             IOrderedQueryable<T>> orderBy = null, string includeProperties = "", bool isTrackingOff = false)
         {
@@ -51,6 +55,22 @@ namespace NecessaryDrugs.Data
                 return result?.AsNoTracking().ToList();
             else
                 return result?.ToList(); 
+        }
+        
+        public T GetByIdWithIncludeProperty(Expression<Func<T, bool>> filter = null, string includeProperties = "")
+        {
+            var query = _dbSet.AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+            return query.FirstOrDefault();
         }
 
         public IEnumerable<T> Get(out int total, out int totalDisplay,
