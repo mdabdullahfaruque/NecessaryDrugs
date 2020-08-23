@@ -61,5 +61,12 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            var model = new RoleUpdateModel();
+            model.Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

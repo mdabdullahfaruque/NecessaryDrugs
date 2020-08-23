@@ -87,17 +87,24 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label asp-for="Image" class="control-label">Medicine Image:</label>
-                        <div class="custom-file">
-                            <input asp-for="Image" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                <div class="row pt-2">
+                    <div class="col-md-4">
+                        <label class="control-label">Previous Image:  </label>
+                        <img src="~/admin/img/@Model.Url" asp-append-version="true" style='height:100px; width:200px;'>
+                    </div>
+                    <div class="col-md-8 mt-1">
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label">Change the Image:</label>
+                            <div class="custom-file">
+                                <input asp-for="Image" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                            <p class="text-blue mt-1">Note : If you upload a new image, the previous image will be deleted.</p>
                         </div>
-                        <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
                 </div>
+                
                 <div class="col-md-12">
                     <div align="right" class="form-group">
                         <input type="submit" value="submit" class="btn btn-sm btn-primary text-uppercase" />

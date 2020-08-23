@@ -33,13 +33,7 @@
                         "orderable": false,
                         "targets": 2,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm"
-                                                        onclick="window.location.href='/admin/role/edit/${data}'" value='${data}'>
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </button>
-                                                        <button type="submit" class="btn btn-danger btn-sm show-bs-modal"
+                            return `<button type="submit" class="btn btn-danger btn-sm show-bs-modal"
                                                         href="#" data-id='${data}' value='${data}'>
                                                             <i class="fas fa-trash">
                                                             </i>
@@ -105,7 +99,7 @@
             </div>
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
-                <form id="deleteForm" action="/admin/category/delete" method="post">
+                <form id="deleteForm" action="/admin/role/delete" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteId" value="" name="id" />
                 </form>

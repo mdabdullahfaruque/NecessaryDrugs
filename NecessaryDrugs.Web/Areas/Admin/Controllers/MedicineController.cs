@@ -32,11 +32,11 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             var model = new MedicineUpdateModel();
             var Categories = model.GetAllCategory();
             model.Categories = (from r in Categories
-                           select new SelectListItem
-                           {
-                               Value = r.Id.ToString(),
-                               Text = r.Name
-                           }).ToList();
+                                select new SelectListItem
+                                {
+                                    Value = r.Id.ToString(),
+                                    Text = r.Name
+                                }).ToList();
             //model.ReturnUrl = returnUrl;
             return View(model);
         }
@@ -79,7 +79,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
                 {
                     return null;
                 }
-                
+
             }
             return uniqueFileName;
         }

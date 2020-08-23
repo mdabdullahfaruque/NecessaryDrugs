@@ -93,6 +93,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 Name = medicine.Name;
                 Description = medicine.Description;
                 Price = medicine.Price;
+                Url = medicine.Image.Url;
                 AmountOrPercentage = medicine.PriceDiscount.Amount;
                 DisountType = medicine.PriceDiscount.GetType().Name;
             }
