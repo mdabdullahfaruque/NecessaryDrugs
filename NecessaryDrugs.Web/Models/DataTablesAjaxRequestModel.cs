@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NecessaryDrugs.Web.Models
@@ -74,6 +75,25 @@ namespace NecessaryDrugs.Web.Models
                     data = (new string[] { }).ToArray()
                 };
             }
+        }
+
+        public string GetSortText(string[] columnNames)
+        {
+            var sortText = new StringBuilder();
+            for (var i = 0; i < columnNames.Length; i++)
+            {
+                if (_request.Query.ContainsKey($"order[{i}][column]"))
+                {
+                    if (sortText.Length > 0)
+                        sortText.Append(",");
+
+                    var column = int.Parse(_request.Query[$"order[{i}][column]"]);
+                    var direction = _request.Query[$"order[{i}][dir]"].ToString();
+                    var sortDirection = $"{columnNames[column]} {(direction == "asc" ? "asc" : "desc")}";
+                    sortText.Append(sortDirection);
+                }
+            }
+            return sortText.ToString();
         }
     }
 }

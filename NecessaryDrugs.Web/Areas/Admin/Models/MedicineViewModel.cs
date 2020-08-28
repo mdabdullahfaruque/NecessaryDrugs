@@ -32,24 +32,20 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
 
         public object GetMedicines(DataTablesAjaxRequestModel tableModel)
         {
-            int total = 0;
-            int totalFiltered = 0;
-            var records = _medicineService.GetMedicines(
+            var data = _medicineService.GetMedicines(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
-                out total,
-                out totalFiltered);
+                tableModel.GetSortText(new string[] { "Name", "Description", "Price","Categories", "PriceDiscount" }));
             return new
             {
-                recordsTotal = total,
-                recordsFiltered = totalFiltered,
-                data = (from record in records
+                recordsTotal = data.total,
+                recordsFiltered = data.totalDisplay,
+                data = (from record in data.records
                         select new string[]
                         {
-                            record.Id.ToString(),
-                            record.Image.Url,
                             record.Name,
+                            record.Image.Url,
                             record.Description,
                             _medicineService.GetCategoryListAsStringForAMedicine(record.Categories),
                             record.Price.ToString(),

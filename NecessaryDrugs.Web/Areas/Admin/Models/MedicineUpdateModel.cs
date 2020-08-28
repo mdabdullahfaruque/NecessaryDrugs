@@ -56,6 +56,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             {
                 Discount = new PercentageDiscount { Amount = AmountOrPercentage };
             }
+            if (Url == null)
+            {
+                Url = "no-image.png";
+            }
             try
             {
                 var medicine = new Medicine

@@ -23,15 +23,12 @@
                 "ajax": "/Admin/Category/GetCategories",
                 "columnDefs": [
                     {
-                        "orderable": false,
                         "targets": 0,
-                        "render": function (data, type, row) {
-                            return `<input type='checkbox' value='${data}'/>`;
-                        }
+                        className: "text-center"
                     },
                     {
                         "orderable": false,
-                        "targets": 2,
+                        "targets": 1,
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm"
                                 onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
@@ -45,7 +42,8 @@
                                     </i>
                                     Delete
                                 </button>`;
-                            }
+                        },
+                        className: "text-center"
                         }
                     ]
                 });
@@ -80,9 +78,8 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" /></th>
                             <th>Name</th>
-                            <th width="14%">Action</th>
+                            <th width="33%">Action</th>
                         </tr>
                     </thead>
                 </table>

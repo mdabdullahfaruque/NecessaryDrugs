@@ -49,11 +49,10 @@ namespace NecessaryDrugs.Core.Services
             return _medicineStoreUnitOfWork.CategoryRepository.GetAll(); ;
         }
 
-        public IEnumerable<Medicine> GetMedicines(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
+        public (IList<Medicine> records, int total, int totalDisplay) GetMedicines(int pageIndex, int pageSize, string searchText, string sortText)
         {
-            return _medicineStoreUnitOfWork.MedicineRepository.Get(
-                out total, out totalFiltered, x => x.Name.Contains(searchText),
-                null,
+            return _medicineStoreUnitOfWork.MedicineRepository.GetDynamic(x => x.Name.Contains(searchText),
+                sortText,
                 "Categories,PriceDiscount,Image",
                 pageIndex,
                 pageSize,

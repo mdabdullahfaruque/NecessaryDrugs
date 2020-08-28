@@ -1,41 +1,44 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>@ViewData["Title"] - NecessaryDrugs.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/client/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/client/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/client/css/magnific-popup.css">
+    <link rel="stylesheet" href="/client/css/jquery-ui.css">
+    <link rel="stylesheet" href="/client/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/client/css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="/client/css/aos.css">
+
+    <link rel="stylesheet" href="/client/css/style.css">
+
+
+
+
+
+
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand align-middle" asp-area="" asp-controller="Home" asp-action="Index">NecessaryDrags.Web</a>
+     <main>
+        @RenderBody()
+    </main>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="my-lg-5 py-lg-5">
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-    </div>
-
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - NecessaryDrugs.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+       
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -43,6 +46,19 @@
     <script>
         $("input[type='text']").attr("autocomplete", "off");
     </script>
+
+
+    <script src="/client/js/jquery-3.3.1.min.js"></script>
+    <script src="/client/js/jquery-ui.js"></script>
+    <script src="/client/js/popper.min.js"></script>
+    <script src="/client/js/bootstrap.min.js"></script>
+    <script src="/client/js/owl.carousel.min.js"></script>
+    <script src="/client/js/jquery.magnific-popup.min.js"></script>
+    <script src="/client/js/aos.js"></script>
+
+    <script src="/client/js/main.js"></script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

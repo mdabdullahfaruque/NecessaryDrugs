@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -28,34 +29,6 @@ namespace NecessaryDrugs.Data
             _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
         }
         
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
-            IOrderedQueryable<T>> orderBy = null, string includeProperties = "", bool isTrackingOff = false)
-        {
-            var query = _dbSet.AsQueryable();
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-
-            IQueryable<T> result = null;
-
-            if (orderBy != null)
-            {
-                result = orderBy(query);
-            }
-
-            if (isTrackingOff)
-                return result?.AsNoTracking().ToList();
-            else
-                return result?.ToList(); 
-        }
         
         public T GetByIdWithIncludeProperty(Expression<Func<T, bool>> filter = null, string includeProperties = "")
         {
@@ -73,43 +46,6 @@ namespace NecessaryDrugs.Data
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> Get(out int total, out int totalDisplay,
-            Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
-                IOrderedQueryable<T>> orderBy = null, string includeProperties = "", 
-            int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
-        {
-            var query = _dbSet.AsQueryable();
-            total = query.Count();
-            totalDisplay = total;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-                totalDisplay = query.Count();
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-
-            IQueryable<T> result = null;
-
-            if (orderBy != null)
-            {
-                result = orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            }
-            else
-            {
-                result = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            }
-
-            if (isTrackingOff)
-                return result?.AsNoTracking().ToList();
-            else
-                return result?.ToList();
-        }
 
         public T GetById(int id)
         {
@@ -117,7 +53,8 @@ namespace NecessaryDrugs.Data
         }
         public IEnumerable<T> GetAll()
         {
-            return _dbSet.AsEnumerable();
+            IQueryable<T> query = _dbSet;
+            return query.ToList();
         }
 
         public int GetCount(Expression<Func<T, bool>> filter = null)
@@ -135,6 +72,166 @@ namespace NecessaryDrugs.Data
         public void Remove(Expression<Func<T, bool>> filter)
         {
             _dbSet.RemoveRange(_dbSet.Where(filter));
+        }
+
+        public virtual IList<T> Get(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.ToList();
+        }
+
+        public virtual (IList<T> data, int total, int totalDisplay) Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
+        {
+            IQueryable<T> query = _dbSet;
+            var total = query.Count();
+            var totalDisplay = query.Count();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+                totalDisplay = query.Count();
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                var result = orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                if (isTrackingOff)
+                    return (result.AsNoTracking().ToList(), total, totalDisplay);
+                else
+                    return (result.ToList(), total, totalDisplay);
+            }
+            else
+            {
+                var result = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                if (isTrackingOff)
+                    return (result.AsNoTracking().ToList(), total, totalDisplay);
+                else
+                    return (result.ToList(), total, totalDisplay);
+            }
+        }
+
+        public virtual (IList<T> data, int total, int totalDisplay) GetDynamic(
+            Expression<Func<T, bool>> filter = null,
+            string orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
+        {
+            IQueryable<T> query = _dbSet;
+            var total = query.Count();
+            var totalDisplay = query.Count();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+                totalDisplay = query.Count();
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                var result = query.OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                if (isTrackingOff)
+                    return (result.AsNoTracking().ToList(), total, totalDisplay);
+                else
+                    return (result.ToList(), total, totalDisplay);
+            }
+            else
+            {
+                var result = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                if (isTrackingOff)
+                    return (result.AsNoTracking().ToList(), total, totalDisplay);
+                else
+                    return (result.ToList(), total, totalDisplay);
+            }
+        }
+
+        public virtual IList<T> Get(Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "", bool isTrackingOff = false)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                var result = orderBy(query);
+
+                if (isTrackingOff)
+                    return result.AsNoTracking().ToList();
+                else
+                    return result.ToList();
+            }
+            else
+            {
+                if (isTrackingOff)
+                    return query.AsNoTracking().ToList();
+                else
+                    return query.ToList();
+            }
+        }
+
+        public virtual IList<T> GetDynamic(Expression<Func<T, bool>> filter = null,
+            string orderBy = null,
+            string includeProperties = "", bool isTrackingOff = false)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                var result = query.OrderBy(orderBy);
+
+                if (isTrackingOff)
+                    return result.AsNoTracking().ToList();
+                else
+                    return result.ToList();
+            }
+            else
+            {
+                if (isTrackingOff)
+                    return query.AsNoTracking().ToList();
+                else
+                    return query.ToList();
+            }
         }
 
         public void Remove(int id)

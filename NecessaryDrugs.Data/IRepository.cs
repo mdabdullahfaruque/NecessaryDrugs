@@ -11,16 +11,29 @@ namespace NecessaryDrugs.Data
     {
         void Add(T entity);
         void Edit(T entityToUpdate);
-        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
-            IOrderedQueryable<T>> orderBy = null, string includeProperties = "", bool isTrackingOff = false);
-        IEnumerable<T> Get(out int total, out int totalDisplay, 
-            Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, 
-            IOrderedQueryable<T>> orderBy = null, string includeProperties = "", int pageIndex = 1, int pageSize = 10, 
-            bool isTrackingOff = false);
         T GetById(int id);
         T GetByIdWithIncludeProperty(Expression<Func<T, bool>> filter = null, string includeProperties = "");
         IEnumerable<T> GetAll();
         int GetCount(Expression<Func<T, bool>> filter = null);
+        IList<T> Get(Expression<Func<T, bool>> filter);
+
+        (IList<T> data, int total, int totalDisplay) Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false);
+
+        (IList<T> data, int total, int totalDisplay) GetDynamic(
+            Expression<Func<T, bool>> filter = null,
+            string orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false);
+
+        IList<T> Get(Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "", bool isTrackingOff = false);
+
+        IList<T> GetDynamic(Expression<Func<T, bool>> filter = null,
+            string orderBy = null,
+            string includeProperties = "", bool isTrackingOff = false);
         void Remove(Expression<Func<T, bool>> filter);
         void Remove(int id);
         void Remove(T entityToDelete);

@@ -21,23 +21,19 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         }
         public object GetCategories(DataTablesAjaxRequestModel tableModel)
         {
-            int total = 0;
-            int totalFiltered = 0;
             var records = _categoryService.GetCategories(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
-                out total,
-                out totalFiltered);
+                tableModel.GetSortText(new string[] { "Name"}));
 
             return new
             {
-                recordsTotal = total,
-                recordsFiltered = totalFiltered,
-                data = (from record in records
+                recordsTotal = records.total,
+                recordsFiltered = records.totalDisplay,
+                data = (from record in records.data
                         select new string[]
                         {
-                            record.Id.ToString(),
                             record.Name,
                             record.Id.ToString()
                         }

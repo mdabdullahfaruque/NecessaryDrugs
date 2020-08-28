@@ -8,7 +8,7 @@ namespace NecessaryDrugs.Core.Services
     public interface ICategoryService
     {
         void AddANewCategory(Category category);
-        IEnumerable<Category> GetCategories(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered);
+        (IList<Category> data, int total, int totalDisplay) GetCategories(int pageIndex, int pageSize, string searchText,string sortText);
         Category GetCategoy(int id);
         void EditCategory(Category category);
         void DeleteCategory(int id);
