@@ -2,68 +2,7 @@
 ViewData["Title"] = "Home Page";
 }
 
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-1 ">
-    <div class="container-fluid">
-        <div class="site-navbar py-2">
-            <div class="search-wrap">
-                <div class="container-fluid">
-                    <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                    <form action="#" method="post">
-                        <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                    </form>
-                </div>
-            </div>
 
-            <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="logo mt-1">
-                        <div class="site-logo">
-                            <a href="index.html" class="js-logo-clone"><strong class="text-primary">Necessary </strong>Drugs</a>
-                        </div>
-                    </div>
-                    <div class="main-nav d-none d-lg-block mx-2">
-                        <nav class="site-navigation text-right text-md-center" role="navigation">
-                            <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                <li class="active"><a href="/Home">Home</a></li>
-                                <li><a href="shop.html">Store</a></li>
-                                <li class="has-children">
-                                    <a href="#">Categories</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Supplements</a></li>
-                                        <li class="has-children">
-                                            <a href="#">Vitamins</a>
-                                            <ul class="dropdown">
-                                                <li><a href="#">Supplements</a></li>
-                                                <li><a href="#">Vitamins</a></li>
-                                                <li><a href="#">Diet &amp; Nutrition</a></li>
-                                                <li><a href="#">Tea &amp; Coffee</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Diet &amp; Nutrition</a></li>
-                                        <li><a href="#">Tea &amp; Coffee</a></li>
-
-                                    </ul>
-                                </li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a class="text-danger text-uppercase" href="/Admin">It's just a demo. Redirect to Admin area.</a></li>
-                            </ul>
-
-                        </nav>
-                    </div>
-
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <div class="icons mr-3">
-                            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="fas fa-search"></span></a>
-                            <a href="cart.html" class="icons-btn d-inline-block bag"><span class="fas fa-shopping-cart ml-1"></span><span class="number">2</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
 <div class="owl-carousel owl-single px-0">
     <div class="site-blocks-cover overlay" style="background-image: url('/client/images/hero_bg.jpg');">
         <div class="container">

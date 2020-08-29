@@ -36,7 +36,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
-                tableModel.GetSortText(new string[] { "Name", "Description", "Price","Categories", "PriceDiscount" }));
+                tableModel.GetSortText(new string[] { "Name","Image", "Description","Categories", "Price", "PriceDiscount.Amount" ,"Action"}));
             return new
             {
                 recordsTotal = data.total,
