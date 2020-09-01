@@ -1,0 +1,24 @@
+﻿@model IEnumerable<NecessaryDrugs.Web.Areas.Client.Models.MedicineViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mx-2 item mb-2 item-v2">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4 text-center item mb-2 item-v2">
+            <div style="background-color:cornsilk;" class="p-2">
+                <h3 class="text-dark pt-2"><a href="shop-single.html">@item.Name</a></h3>
+                <a class="m-2" href="/client/medicine/details/@item.Id">
+                    <img class="m-2" src="~/admin/img/@item.Url"
+                         asp-append-version="true" style='height:250px; width:300px;'>
+                </a>
+                <p class="price">@item.Price TK</p>
+                <a href="/client/medicine/details/@item.Id" class="btn btn-outline-info">View Details</a>
+            </div>
+
+        </div>
+    }
+</div>

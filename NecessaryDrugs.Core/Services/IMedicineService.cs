@@ -11,6 +11,7 @@ namespace NecessaryDrugs.Core.Services
         void AddANewMedicine(Medicine medicine);
         void AddMedicineCategory(int CateId, Medicine medicine);
         string GetCategoryListAsStringForAMedicine(IList<MedicineCategory> medicineCategories);
+        IEnumerable<Medicine> GetAllMedicine();
         IEnumerable<Category> GetCategoryListForAMedicine(IList<MedicineCategory> medicineCategories);
         IEnumerable<Category> GetAllCategories();
         Medicine GetMedicine(int id);

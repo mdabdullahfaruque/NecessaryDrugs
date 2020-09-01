@@ -123,5 +123,9 @@ namespace NecessaryDrugs.Core.Services
                 return priceDiscount.Amount.ToString() + " % ";
             }
         }
+        public IEnumerable<Medicine> GetAllMedicine()
+        {
+            return _medicineStoreUnitOfWork.MedicineRepository.GetAll();
+        }
     }
 }
