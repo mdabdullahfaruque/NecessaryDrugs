@@ -127,5 +127,6 @@ namespace NecessaryDrugs.Core.Services
         {
             return _medicineStoreUnitOfWork.MedicineRepository.GetAll();
         }
+
     }
 }

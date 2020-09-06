@@ -1,9 +1,0 @@
-D:\Project\NecessaryDrags\NecessaryDrags.Data\bin\Debug\netstandard2.0\NecessaryDrags.Data.deps.json
-D:\Project\NecessaryDrags\NecessaryDrags.Data\bin\Debug\netstandard2.0\NecessaryDrags.Data.dll
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.csprojAssemblyReference.cache
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.AssemblyInfoInputs.cache
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.AssemblyInfo.cs
-D:\Project\NecessaryDrags\NecessaryDrags.Data\bin\Debug\netstandard2.0\NecessaryDrags.Data.pdb
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.csproj.CoreCompileInputs.cache
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.dll
-D:\Project\NecessaryDrags\NecessaryDrags.Data\obj\Debug\netstandard2.0\NecessaryDrags.Data.pdb

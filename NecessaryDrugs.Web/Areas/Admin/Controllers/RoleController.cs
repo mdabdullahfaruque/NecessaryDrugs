@@ -29,7 +29,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
-        //[Authorize(Policy = "CityUsersOnly")]
         public IActionResult Index()
         {
             var model = new RoleViewModel();

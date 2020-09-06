@@ -52,7 +52,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
         {
             var model = new UserModel();
             model.Delete(id);
-            return RedirectToAction("Index", new { id });
+            return RedirectToAction("Index");
             //Note: After clicking delete, the operation will be done, but the page will not be refreshed.
 
             //return Json(new { html = Helper<UserController>.RenderRazorViewToString(this, "Index", model.GetUsers() ) });

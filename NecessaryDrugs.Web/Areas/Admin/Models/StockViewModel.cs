@@ -3,6 +3,7 @@ using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
     public class StockViewModel
     {
         public int Id { get; set; }
-        public int MedicineId { get; set; }
+        [DisplayName("Medicine Name")]
+        public string MedicineName { get; set; }
         public Medicine Medicine { get; set; }
         public int Quantity { get; set; }
         public double TotalPrice { get; set; }
@@ -29,15 +31,16 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         {
             var allData = _StockService.GetAllStocks();
             var StockModelList = new List<StockViewModel>();
-            foreach (var Stock in allData)
+            foreach (var stock in allData)
             {
+                var medicine = _StockService.GetMedicine(stock.MedicineId);
                 StockModelList.Add(new StockViewModel
                 {
-                    Id = Stock.Id,
-                    MedicineId = Stock.MedicineId,
-                    Quantity = Stock.Quantity,
-                    TotalPrice = Stock.TotalPrice,
-                    Description = Stock.Description
+                    Id = stock.Id,
+                    MedicineName = medicine.Name,
+                    Quantity = stock.Quantity,
+                    TotalPrice = stock.TotalPrice,
+                    Description = stock.Description
                 });
             }
             return StockModelList;

@@ -42,9 +42,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddOrEdit(int id, /*[Bind("Id,MedicineId,Quantity,TotalPrice,Description")]*/ StockUpdateModel model)
         {
+            var viewModel = new StockViewModel();
             if (ModelState.IsValid)
             {
-                //Insert
+                //Add
                 if (id == 0)
                 {
                     model.AddStock();
@@ -55,7 +56,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
                 {
                     model.UpdateStock(id);
                 }
-                return Json(new { isValid = true, html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", model.GetAllStocks()) });
+                return Json(new { isValid = true, html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", viewModel.GetStocks()) });
             }
             return Json(new { isValid = false, html = Helper<StockController>.RenderRazorViewToString(this, "AddOrEdit", model) });
         }
@@ -64,9 +65,9 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var model = new StockUpdateModel();
-
+            var viewModel = new StockViewModel();
             model.Delete(id);
-            return Json(new { html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", model.GetAllStocks()) });
+            return Json(new { html = Helper<StockController>.RenderRazorViewToString(this, "_ViewAll", viewModel.GetStocks()) });
         }
     }
 }

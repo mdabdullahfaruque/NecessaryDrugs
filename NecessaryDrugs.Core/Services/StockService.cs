@@ -2,6 +2,7 @@
 using NecessaryDrugs.Core.UnitOfWorks;
 using System;
 using System.Collections.Generic;
+using System.Linq.Dynamic.Core;
 using System.Text;
 
 namespace NecessaryDrugs.Core.Services
@@ -38,7 +39,6 @@ namespace NecessaryDrugs.Core.Services
             var oldStock = _medicineStoreUnitOfWork.StockRepository.GetById(stock.Id);
             oldStock.MedicineId = stock.MedicineId;
             oldStock.Quantity = stock.Quantity;
-            oldStock.TotalPrice = stock.TotalPrice;
             oldStock.Description = stock.Description;
             _medicineStoreUnitOfWork.Save();
         }
@@ -46,6 +46,13 @@ namespace NecessaryDrugs.Core.Services
         public IEnumerable<Stock> GetAllStocks()
         {
             return _medicineStoreUnitOfWork.StockRepository.GetAll();
+            //return _medicineStoreUnitOfWork.StockRepository.Get(null, y => y.OrderBy("Medicne.Name"),"",true);
+
+        }
+
+        public Medicine GetMedicine(int medicineId)
+        {
+            return _medicineStoreUnitOfWork.MedicineRepository.GetById(medicineId);
         }
 
         public Stock GetStock(int id)

@@ -12,5 +12,6 @@ namespace NecessaryDrugs.Core.Services
         Stock GetStock(int id);
         void EditStock(Stock stock);
         void DeleteStock(int id);
+        Medicine GetMedicine(int medicineId);
     }
 }

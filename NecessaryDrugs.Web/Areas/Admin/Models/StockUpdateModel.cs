@@ -16,12 +16,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         IStockService _stockService;
         public int Id { get; set; }
         [Required(ErrorMessage ="This field is required")]
-        [DisplayName("Medicine Id")]
         public int MedicineId { get; set; }
         public Medicine Medicine { get; set; }
         [Required(ErrorMessage = "This field is required")]
         public int Quantity { get; set; }
-        [Required(ErrorMessage = "This field is required")]
         public double TotalPrice { get; set; }
         public string Description { get; set; }
         public StockUpdateModel()
@@ -41,7 +39,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 Id = stock.Id;
                 MedicineId = stock.MedicineId;
                 Quantity = stock.Quantity;
-                TotalPrice = stock.TotalPrice;
                 Description = stock.Description;
             }
         }
@@ -50,12 +47,12 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         {
             try
             {
-
+                Medicine medicine=_stockService.GetMedicine(MedicineId);
                 _stockService.AddANewStock(new Stock
                 {
-                    MedicineId = this.MedicineId,
+                    MedicineId = medicine.Id,
                     Quantity=Quantity,
-                    TotalPrice=TotalPrice,
+                    TotalPrice=Quantity*medicine.Price,
                     Description=Description
                 });
                 Notification = new NotificationModel("Success!",
@@ -65,7 +62,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             catch (InvalidOperationException iex)
             {
                 Notification = new NotificationModel("Failed!",
-                    "Failed to add Stock, please provide valid name.",
+                    "Failed to add Stock, please provide valid medicine name.",
                     Notificationtype.Fail);
             }
             catch (Exception ex)
@@ -85,15 +82,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         {
             try
             {
-
-                _stockService.EditStock(new Stock
-                {
-                    Id=Id,
-                    MedicineId = this.MedicineId,
-                    Quantity = Quantity,
-                    TotalPrice = TotalPrice,
-                    Description = Description
-                });
+                var oldStock = _stockService.GetStock(id);
+                oldStock.MedicineId = this.MedicineId;
+                oldStock.Quantity = Quantity;
+                oldStock.Description = Description;
                 Notification = new NotificationModel("Success!",
                     "Stock added successfully.",
                     Notificationtype.Success);
@@ -112,22 +104,22 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             }
         }
 
-        public IEnumerable<StockViewModel> GetAllStocks()
-        {
-            var allData = _stockService.GetAllStocks();
-            var StockModelList = new List<StockViewModel>();
-            foreach (var Stock in allData)
-            {
-                StockModelList.Add(new StockViewModel
-                {
-                    Id = Stock.Id,
-                    MedicineId = Stock.MedicineId,
-                    Quantity = Stock.Quantity,
-                    TotalPrice = Stock.TotalPrice,
-                    Description = Stock.Description
-                });
-            }
-            return StockModelList;
-        }
+        //public IEnumerable<StockViewModel> GetAllStocks()
+        //{
+        //    var allData = _stockService.GetAllStocks();
+        //    var StockModelList = new List<StockViewModel>();
+        //    foreach (var stock in allData)
+        //    {
+        //        StockModelList.Add(new StockViewModel
+        //        {
+        //            Id = stock.Id,
+        //            MedicineName = stock.Medicine.Name,
+        //            Quantity = stock.Quantity,
+        //            TotalPrice = stock.TotalPrice,
+        //            Description = stock.Description
+        //        });
+        //    }
+        //    return StockModelList;
+        //}
     }
 }
