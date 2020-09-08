@@ -220,10 +220,15 @@ namespace NecessaryDrugs.Web.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Medicines");
                 });
@@ -344,6 +349,38 @@ namespace NecessaryDrugs.Web.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("NecessaryDrugs.Core.Entities.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DaliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Orderdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentTransactionID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("NecessaryDrugs.Core.Entities.Stock", b =>
                 {
                     b.Property<int>("Id")
@@ -453,6 +490,13 @@ namespace NecessaryDrugs.Web.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NecessaryDrugs.Core.Entities.Medicine", b =>
+                {
+                    b.HasOne("NecessaryDrugs.Core.Entities.Order", "Order")
+                        .WithMany("Medicines")
+                        .HasForeignKey("OrderId");
+                });
+
             modelBuilder.Entity("NecessaryDrugs.Core.Entities.MedicineCategory", b =>
                 {
                     b.HasOne("NecessaryDrugs.Core.Entities.Category", "Category")
@@ -475,6 +519,13 @@ namespace NecessaryDrugs.Web.Migrations
                         .HasForeignKey("NecessaryDrugs.Core.Entities.MedicineImage", "MedicineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NecessaryDrugs.Core.Entities.Order", b =>
+                {
+                    b.HasOne("NecessaryDrugs.Core.Entities.NormalUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("NecessaryDrugs.Core.Entities.Stock", b =>

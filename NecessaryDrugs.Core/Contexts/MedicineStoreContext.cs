@@ -60,6 +60,11 @@ namespace NecessaryDrugs.Core.Contexts
                 .HasOne(m => m.Stock)
                 .WithOne(s => s.Medicine);
 
+            builder.Entity<Order>()
+                .HasMany(o => o.Medicines)
+                .WithOne(m => m.Order);
+
+
             builder.Entity<ApplicationUserRole>(userRole =>
             {
                 userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -86,5 +91,6 @@ namespace NecessaryDrugs.Core.Contexts
         public DbSet<FixedAmountDiscount> FixedAmountDiscounts { get; set; }
         public DbSet<PercentageDiscount> PercentageDiscounts { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Order> Order { get; set; }
     }
 }
