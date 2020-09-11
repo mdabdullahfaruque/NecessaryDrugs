@@ -59,6 +59,9 @@ namespace NecessaryDrugs.Core.Contexts
             builder.Entity<Medicine>()
                 .HasOne(m => m.Stock)
                 .WithOne(s => s.Medicine);
+            builder.Entity<Stock>()
+                .HasOne(s => s.Medicine)
+                .WithOne(m => m.Stock);
 
             builder.Entity<Order>()
                 .HasMany(o => o.Medicines)

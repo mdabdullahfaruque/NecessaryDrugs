@@ -85,7 +85,15 @@
                                 <partial name="_LoginPartial" />
                                 <div class="icons mr-3">
                                     <a href="#" class="icons-btn d-inline-block js-search-open"><span class="fas fa-search"></span></a>
-                                    <a href="cart.html" class="icons-btn d-inline-block bag"><span class="fas fa-shopping-cart ml-1"></span><span class="number">2</span></a>
+                                    <a href="/client/cart/cart" class="icons-btn d-inline-block bag">
+                                        <span class="fas fa-shopping-cart ml-1"></span>@if (TempData["cart"] != null)
+                                        {
+                                            TempData.Keep();
+                                            <span class="number">
+                                            @TempData["item_count"]
+                                            </span>
+                                        }
+                                    </a>
                                 </div>
                             </div>
                         </div>
