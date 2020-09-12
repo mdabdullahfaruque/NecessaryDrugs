@@ -35,7 +35,7 @@ namespace NecessaryDrugs.Web.Controllers
             _emailSender = emailSender;
         }
         [HttpGet]
-        public async Task<ActionResult> Login(string returnUrl = null)
+        public async Task<ActionResult> Login(string returnUrl=null)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -76,19 +76,18 @@ namespace NecessaryDrugs.Web.Controllers
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     _logger.LogInformation("User logged in.");
-                    if (string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
                     {
                         return LocalRedirect(model.ReturnUrl);
                     }
-                    else if (await _userManager.IsInRoleAsync(user, "Admin"))
-                    {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-                    }
+                    //else if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    //{
+                    //    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    //}
                     else
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    //return LocalRedirect(model.ReturnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

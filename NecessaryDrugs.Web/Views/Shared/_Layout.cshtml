@@ -32,7 +32,7 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    @if (SignInManager.IsSignedIn(User))
+    @if (User.Identity.IsAuthenticated)
     {
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-1 ">
             <div class="container-fluid">
@@ -90,7 +90,7 @@
                                         {
                                             TempData.Keep();
                                             <span class="number">
-                                            @TempData["item_count"]
+                                                @TempData["item_count"]
                                             </span>
                                         }
                                     </a>
@@ -101,32 +101,32 @@
                 </div>
             </div>
         </nav>
-    }
-    <main>
-        @RenderBody()
-    </main>
+     }
+        <main>
+            @RenderBody()
+        </main>
+
+     
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/admin/js/adminlte.js" asp-append-version="true"></script>
+        <script>
+            $("input[type='text']").attr("autocomplete", "off");
+        </script>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/admin/js/adminlte.js" asp-append-version="true"></script>
-    <script>
-        $("input[type='text']").attr("autocomplete", "off");
-    </script>
+        <script src="/client/js/jquery-3.3.1.min.js"></script>
+        <script src="/client/js/jquery-ui.js"></script>
+        <script src="/client/js/popper.min.js"></script>
+        <script src="/client/js/bootstrap.min.js"></script>
+        <script src="/client/js/owl.carousel.min.js"></script>
+        <script src="/client/js/jquery.magnific-popup.min.js"></script>
+        <script src="/client/js/aos.js"></script>
+
+        <script src="/client/js/main.js"></script>
 
 
-    <script src="/client/js/jquery-3.3.1.min.js"></script>
-    <script src="/client/js/jquery-ui.js"></script>
-    <script src="/client/js/popper.min.js"></script>
-    <script src="/client/js/bootstrap.min.js"></script>
-    <script src="/client/js/owl.carousel.min.js"></script>
-    <script src="/client/js/jquery.magnific-popup.min.js"></script>
-    <script src="/client/js/aos.js"></script>
-
-    <script src="/client/js/main.js"></script>
-
-
-    @RenderSection("Scripts", required: false)
-</body>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>
