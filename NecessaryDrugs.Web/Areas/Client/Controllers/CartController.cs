@@ -146,8 +146,8 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             var model = new InvoiceModel();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
+            TempData["user"] = JsonConvert.SerializeObject(user);
             return View(model.GenerateInvoice(user, list2));
-            
         }
 
         [HttpPost]
@@ -155,8 +155,10 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
         {
             ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
             var list2 = ViewData["cart"] as List<CartModel>;
+            ViewData["total"] = JsonConvert.DeserializeObject<string>(TempData["total"] as string);
+            var totalBill = ViewData["total"] as string;
             var cartModel = new CartModel();
-            cartModel.AddOrder(invoiceModel.User,list2);
+            cartModel.AddOrder(invoiceModel,totalBill,list2);
             TempData.Remove("total");
             TempData.Remove("cart");
             TempData["msg"] = JsonConvert.SerializeObject("Your Order is Placed Successfully!!");

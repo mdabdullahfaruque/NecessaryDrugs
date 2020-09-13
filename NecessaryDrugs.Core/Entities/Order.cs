@@ -12,19 +12,13 @@ namespace NecessaryDrugs.Core.Entities
         public IList<Medicine> Medicines { get; set; }
         public int Quantity { get; set; }
         public double TotalPrice { get; set; }
-        public NormalUser User { get; set; }
+        public string UserId { get; set; }
         public DateTime Orderdate { get; set; }
-        public enum DeliveryStatus{ 
-            pending,
-            shipped,
-            delivered
-        }
+        public string DeliveryStatus { get; set; }
+        public string DelivaryAdress { get; set; }
+        public string ContactNo { get; set; }
         public DateTime DaliveryDate { get; set; }
-        public enum PaymentType { 
-            Cash,
-            Card,
-            cheque
-        }
+        public string PaymentType { get; set; }
         public string PaymentTransactionID { get; set; }
     }
 }

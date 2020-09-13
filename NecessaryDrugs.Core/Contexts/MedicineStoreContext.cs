@@ -64,7 +64,7 @@ namespace NecessaryDrugs.Core.Contexts
                 .WithOne(m => m.Stock);
 
             builder.Entity<Order>()
-                .HasMany(o => o.Medicines)
+                .HasMany(or => or.Medicines)
                 .WithOne(m => m.Order);
 
 

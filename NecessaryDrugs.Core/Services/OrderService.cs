@@ -16,7 +16,8 @@ namespace NecessaryDrugs.Core.Services
 
         public void AddAnOrder(Order order)
         {
-            throw new NotImplementedException();
+            _medicineStoreUnitOfWork.OrderRepository.Add(order);
+            _medicineStoreUnitOfWork.Save();
         }
 
         public Medicine GetMedicine(int id)

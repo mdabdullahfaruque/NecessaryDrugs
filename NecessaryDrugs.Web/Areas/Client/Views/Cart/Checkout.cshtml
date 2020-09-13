@@ -5,6 +5,7 @@
 }
 <div class="container">
     <form action="/client/cart/checkout" method="post">
+        <input type="hidden" name="UserId" value="@Model.UserId" />
         <div class="col-md-12 p-2 bg-white text-center">
             <div class="p-3">
                 <h2>Invoice</h2>
@@ -48,8 +49,8 @@
                                     </tr>
                                 }
                                 <tr>
-                                    <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                    <td class="text-black font-weight-bold"><strong>@TempData["total"]</strong></td>
+                                    <td class="text-black font-weight-bold"><strong>Total Bill</strong></td>
+                                    <td class="text-black font-weight-bold"><strong>@Model.TotalBill</strong></td>
                                 </tr>
                                 <tr class="mt-2 text-center">
                                     <td class="text-black font-weight-bold"><strong>Select a Payment Method</strong></td>

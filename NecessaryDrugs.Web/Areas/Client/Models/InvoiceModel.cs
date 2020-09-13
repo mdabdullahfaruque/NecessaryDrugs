@@ -13,7 +13,7 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
 {
     public class InvoiceModel
     {
-        public NormalUser User { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
         public string ContactNo { get; set; }
         public List<CartModel> MedList { get; set; }
@@ -25,7 +25,7 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
         {
             return new InvoiceModel
             {
-                User = user,
+                UserId=user.Id,
                 UserName = user.FirstName + user.LastName,
                 ContactNo = user.PhoneNumber,
                 Adress = user.Adress,

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Razor.Language;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
 using System;
@@ -26,7 +27,6 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double TotalPrice { get; set; }
-        public NormalUser User { get; set; }
         public DateTime Orderdate { get; set; }
         
         public enum PaymentType
@@ -51,14 +51,28 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
             return cart;
         }
 
-        internal void AddOrder(NormalUser user, List<CartModel> list)
+        internal void AddOrder(InvoiceModel model, string totalBill, List<CartModel> list)
         {
             if (list != null)
             {
+                var medList = new List<Medicine>();
+                foreach(var item in list)
+                {
+                    var medicine = _orderService.GetMedicine(item.MedicineId);
+                    medList.Add(medicine);
+                }
                 _orderService.AddAnOrder(new Order
                 {
-
+                    UserId=model.UserId,
+                    DelivaryAdress=model.Adress,
+                    ContactNo=model.ContactNo,
+                    PaymentType=model.PaymentType,
+                    DeliveryStatus="Pending",
+                    Medicines=medList,
+                    Orderdate=DateTime.Now,
+                    TotalPrice=Convert.ToDouble(totalBill)
                 });
+
             }
         }
     }
