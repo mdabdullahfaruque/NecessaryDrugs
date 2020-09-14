@@ -5,11 +5,12 @@
 }
 <div class="site-wrap">
     @if (TempData["item_count"] == null)
-     {  
-    <div class="text-center">
-        <h1 class="text-dark mx-2 my-1">Cart is empty</h1>
-        <a class="btn btn-outline-primary mx-2 my-4" href="@Url.Action("Index", "Medicine")">Back To Shop</a>
-    </div>
+     {
+         TempData.Keep();
+         <div class="text-center">
+             <h1 class="text-dark mx-2 my-1">Cart is empty</h1>
+             <a class="btn btn-outline-primary mx-2 my-4" href="@Url.Action("Index", "Medicine")">Back To Shop</a>
+         </div>
      }
     else
     {

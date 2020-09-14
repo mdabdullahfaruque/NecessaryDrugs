@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Web.Areas.Client.Models;
-using NecessaryDrugs.Web.Controllers;
 using Newtonsoft.Json;
 
 namespace NecessaryDrugs.Web.Areas.Client.Controllers
@@ -39,13 +37,13 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             {
                 list.Add(cart);
                 TempData["cart"] = JsonConvert.SerializeObject(list);
-                ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                list2 = ViewData["cart"] as List<CartModel>;
+                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                //list2 = ViewData["cart"] as List<CartModel>;
             }
             else
             {
-                ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                list2 = ViewData["cart"] as List<CartModel>;
+                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                //list2 = ViewData["cart"] as List<CartModel>;
                 int flag = 0;
                 foreach (var item in list2)
                 {
@@ -81,8 +79,8 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             if (TempData["cart"] != null)
             {
                 double x = 0;
-                ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                list2 = ViewData["cart"] as List<CartModel>;
+                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                //list2 = ViewData["cart"] as List<CartModel>;
                 foreach (var item in list2)
                 {
                     x += item.TotalPrice;
@@ -112,8 +110,8 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             }
             else
             {
-                ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                list2 = ViewData["cart"] as List<CartModel>;
+                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                //list2 = ViewData["cart"] as List<CartModel>;
                 int index = 0;
                 foreach(var item in list2)
                 {
@@ -140,9 +138,9 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
         }
         [Authorize]
         public async Task<ActionResult> Checkout()
-        {   
-            ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-            var list2 = ViewData["cart"] as List<CartModel>;
+        {
+            var list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+            //var list2 = ViewData["cart"] as List<CartModel>;
             var model = new InvoiceModel();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
@@ -153,14 +151,15 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
         [HttpPost]
         public ActionResult Checkout(InvoiceModel invoiceModel)
         {
-            ViewData["cart"] = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-            var list2 = ViewData["cart"] as List<CartModel>;
-            ViewData["total"] = JsonConvert.DeserializeObject<string>(TempData["total"] as string);
-            var totalBill = ViewData["total"] as string;
+            var list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+            //var list2 = ViewData["cart"] as List<CartModel>;
+            var totalBill = JsonConvert.DeserializeObject<string>(TempData["total"] as string);
+            //var totalBill = ViewData["total"] as string;
             var cartModel = new CartModel();
             cartModel.AddOrder(invoiceModel,totalBill,list2);
             TempData.Remove("total");
             TempData.Remove("cart");
+            TempData.Remove("item_count");
             TempData["msg"] = JsonConvert.SerializeObject("Your Order is Placed Successfully!!");
             return RedirectToAction("OrderSucceeded");
         }
@@ -168,9 +167,5 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
         {
             return View();
         }
-
-        //    TempData.Keep();
-        //    return View();
-        //}
     }
 }
