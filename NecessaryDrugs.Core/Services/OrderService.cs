@@ -20,6 +20,11 @@ namespace NecessaryDrugs.Core.Services
             _medicineStoreUnitOfWork.Save();
         }
 
+        public object GetAllStocks()
+        {
+            throw new NotImplementedException();
+        }
+
         public Medicine GetMedicine(int id)
         {
             return _medicineStoreUnitOfWork.MedicineRepository.GetByIdWithIncludeProperty(x => x.Id == id, "Categories,PriceDiscount,Image");

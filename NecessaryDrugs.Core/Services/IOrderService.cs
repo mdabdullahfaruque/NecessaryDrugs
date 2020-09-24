@@ -9,5 +9,6 @@ namespace NecessaryDrugs.Core.Services
     {
         Medicine GetMedicine(int id);
         void AddAnOrder(Order order);
+        object GetAllStocks();
     }
 }

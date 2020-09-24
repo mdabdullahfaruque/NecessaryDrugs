@@ -41,7 +41,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Add(MedicineUpdateModel model)
+        public IActionResult Add([FromBody]MedicineUpdateModel model)
         {
             model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)

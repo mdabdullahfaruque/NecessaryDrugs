@@ -16,6 +16,26 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
         {
             _orderService = Startup.AutofacContainer.Resolve<IOrderService>();
         }
+
+        //public IEnumerable<CartModel> GetStocks()
+        //    {
+        //        var allData = _orderService.GetAllStocks();
+        //        var OrderModelList = new List<CartModel>();
+        //        foreach (var order in allData)
+        //        {
+        //            var medicine = _StockService.GetMedicine(stock.MedicineId);
+        //            StockModelList.Add(new CartModel
+        //            {
+        //                OrderId = order.Id,
+        //                TotalPrice = stock.Quantity,
+        //                TotalPrice = stock.TotalPrice,
+        //                Description = stock.Description
+        //            });
+        //        }
+        //        return StockModelList;
+        //    }
+        
+
         public CartModel(IOrderService orderService)
         {
             _orderService = orderService;
