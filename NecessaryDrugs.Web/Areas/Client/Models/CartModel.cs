@@ -75,23 +75,29 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
         {
             if (list != null)
             {
-                var medList = new List<Medicine>();
-                foreach(var item in list)
+                var medList = new List<OrderItem>();
+                string quantityListAsString = null;
+                foreach (var item in list)
                 {
                     var medicine = _orderService.GetMedicine(item.MedicineId);
-                    medList.Add(medicine);
+                    medList.Add(new OrderItem
+                    {
+                        MedicineId = medicine.Id
+                    }) ;
+                    quantityListAsString += item.Quantity + " ";
                 }
                 _orderService.AddAnOrder(new Order
                 {
-                    UserId=model.UserId,
-                    DelivaryAdress=model.Adress,
-                    ContactNo=model.ContactNo,
-                    PaymentType=model.PaymentType,
-                    DeliveryStatus="Pending",
-                    Medicines=medList,
-                    Orderdate=DateTime.Now,
-                    TotalPrice=Convert.ToDouble(totalBill)
-                });
+                    UserId = model.UserId,
+                    DelivaryAdress = model.Adress,
+                    ContactNo = model.ContactNo,
+                    PaymentType = model.PaymentType,
+                    DeliveryStatus = "Pending",
+                    OrderedMedicines = medList,
+                    QuantitiesListAsString = quantityListAsString,
+                    Orderdate = DateTime.Now,
+                    TotalPrice = Convert.ToDouble(totalBill)
+                }); ;
 
             }
         }

@@ -45,12 +45,10 @@ namespace NecessaryDrugs.Core.Contexts
 
             builder.Entity<MedicineCategory>()
                 .HasKey(pc => new { pc.MedicineId, pc.CategoryId });
-
             builder.Entity<MedicineCategory>()
                 .HasOne(pc => pc.Medicine)
                 .WithMany(p => p.Categories)
                 .HasForeignKey(pc => pc.MedicineId);
-
             builder.Entity<MedicineCategory>()
                 .HasOne(pc => pc.Category)
                 .WithMany(c => c.Categories)
@@ -62,10 +60,35 @@ namespace NecessaryDrugs.Core.Contexts
             builder.Entity<Stock>()
                 .HasOne(s => s.Medicine)
                 .WithOne(m => m.Stock);
+            builder.Entity<Supplier>()
+                .HasOne(s => s.User)
+                .WithOne(n => n.Supplier);
 
-            builder.Entity<Order>()
-                .HasMany(or => or.Medicines)
-                .WithOne(m => m.Order);
+            builder.Entity<OrderItem>()
+                .HasKey(oi => new { oi.MedicineId, oi.OrderId });
+            builder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderedMedicines)
+                .HasForeignKey(oi=>oi.OrderId);
+            builder.Entity<OrderItem>()
+                .HasOne(oi => oi.Medicine)
+                .WithMany(o => o.OrderedMedicines)
+                .HasForeignKey(oi=>oi.MedicineId);
+
+            builder.Entity<PurchaseItem>()
+                .HasKey(pi => new { pi.MedicineId, pi.PurchaseId });
+            builder.Entity<PurchaseItem>()
+                .HasOne(pi => pi.Purchase)
+                .WithMany(o => o.PurchasedMedicines)
+                .HasForeignKey(pi => pi.PurchaseId);
+            builder.Entity<PurchaseItem>()
+                .HasOne(pi => pi.Medicine)
+                .WithMany(o => o.PurchasedMedicines)
+                .HasForeignKey(pi => pi.MedicineId);
+
+            //builder.Entity<Purchase>()
+            //    .HasMany(p => p.Medicines)
+            //    .WithOne(m => m.Purchase);
 
 
             builder.Entity<ApplicationUserRole>(userRole =>
@@ -94,6 +117,10 @@ namespace NecessaryDrugs.Core.Contexts
         public DbSet<FixedAmountDiscount> FixedAmountDiscounts { get; set; }
         public DbSet<PercentageDiscount> PercentageDiscounts { get; set; }
         public DbSet<Stock> Stocks { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseItem> PurchaseItems { get; set; }
     }
 }

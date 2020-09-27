@@ -16,6 +16,10 @@ namespace NecessaryDrugs.Core.Contexts
         DbSet<PercentageDiscount> PercentageDiscounts { get; set; }
         DbSet<Stock> Stocks { get; set; }
         DbSet<NormalUser> Users { get; set; }
-        DbSet<Order> Order { get; set; }
+        DbSet<Order> Orders { get; set; }
+        DbSet<OrderItem> OrderItems { get; set; }
+        DbSet<Supplier> Suppliers { get; set; }
+        DbSet<Purchase> Purchases { get; set; }
+        DbSet<PurchaseItem> PurchaseItems { get; set; }
     }
 }

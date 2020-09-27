@@ -8,9 +8,9 @@ namespace NecessaryDrugs.Core.Entities
 {
     public class Order
     {
-        public int OrderId {get; set;}
-        public IList<Medicine> Medicines { get; set; }
-        public int Quantity { get; set; }
+        public int OrderId { get; set; }
+        public IList<OrderItem> OrderedMedicines { get; set; }
+        public string QuantitiesListAsString { get; set; }
         public double TotalPrice { get; set; }
         public string UserId { get; set; }
         public DateTime Orderdate { get; set; }

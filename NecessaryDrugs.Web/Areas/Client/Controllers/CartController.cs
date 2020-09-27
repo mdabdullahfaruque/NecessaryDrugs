@@ -160,7 +160,6 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             TempData.Remove("total");
             TempData.Remove("cart");
             TempData.Remove("item_count");
-            TempData["msg"] = JsonConvert.SerializeObject("Your Order is Placed Successfully!!");
             return RedirectToAction("OrderSucceeded");
         }
         public IActionResult OrderSucceeded()

@@ -11,7 +11,7 @@ namespace NecessaryDrugs.Core.Entities
         public int Id { get; set; }
         [Required, MaxLength(30)]
         public string Name { get; set; }
-        [MaxLength(1000)]
+        [MaxLength(1000)] 
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
@@ -20,6 +20,9 @@ namespace NecessaryDrugs.Core.Entities
         public IList<MedicineCategory> Categories { get; set; }
         public Discount PriceDiscount { get; set; }
         public Stock Stock { get; set; }
-        public Order Order { get; set; }
+        public IList<OrderItem> OrderedMedicines { get; set; }
+        public IList<PurchaseItem> PurchasedMedicines { get; set; }
+        //public Order Order { get; set; }
+        //public Purchase Purchase { get; set; }
     }
 }

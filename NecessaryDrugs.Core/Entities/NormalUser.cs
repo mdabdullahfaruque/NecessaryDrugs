@@ -12,5 +12,6 @@ namespace NecessaryDrugs.Core.Entities
         public string Adress { get; set; }
         public string ContatctNo { get; set; }
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public Supplier Supplier { get; internal set; }
     }
 }
