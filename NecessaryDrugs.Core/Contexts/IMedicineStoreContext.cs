@@ -19,7 +19,5 @@ namespace NecessaryDrugs.Core.Contexts
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }
         DbSet<Supplier> Suppliers { get; set; }
-        DbSet<Purchase> Purchases { get; set; }
-        DbSet<PurchaseItem> PurchaseItems { get; set; }
     }
 }

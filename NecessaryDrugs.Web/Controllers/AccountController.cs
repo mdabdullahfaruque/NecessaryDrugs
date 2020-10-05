@@ -13,6 +13,9 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
+using NecessaryDrugs.Core.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace NecessaryDrugs.Web.Controllers
 {
@@ -22,17 +25,19 @@ namespace NecessaryDrugs.Web.Controllers
         private readonly UserManager<NormalUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly IConfiguration _config;
         public AccountController(
             UserManager<NormalUser> userManager,
             SignInManager<NormalUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _config = config;
         }
         [HttpGet]
         public async Task<ActionResult> Login(string returnUrl=null)
@@ -136,30 +141,41 @@ namespace NecessaryDrugs.Web.Controllers
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = model.ReturnUrl },
-                        protocol: Request.Scheme);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail","Account", new { userId = user.Id, code = code},
+                        protocol: Request.Scheme, Request.Host.ToString());
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                    //   $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var mailsender = new MailSender(_config);
+                    mailsender.Send(new List<MailMessage>
+                    {
+                        new MailMessage
+                        {
+                            Body=$"<a href=\"{callbackUrl}\">Verify Email</a>",
+                            Receiver=model.Email,
+                            Sender="abdullahfaruquearman@gmail.com",
+                            SenderName="Arman",
+                            Subject="Confirm your email"
+                        }
+                    });
 
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
-                    //}
-                    //else
-                    //{
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    //return LocalRedirect(model.ReturnUrl);
-                    //}
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {
+                        return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
+                    }
+                    else
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(model.ReturnUrl);
+                    }
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(model.ReturnUrl);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                    //        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //return LocalRedirect(model.ReturnUrl);
                     
                 }
                 foreach (var error in result.Errors)
@@ -171,8 +187,24 @@ namespace NecessaryDrugs.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        public IActionResult ConfirmEmail()
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
+            string StatusMessage;
+            if (userId == null || code == null)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userId}'.");
+            }
+
+            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
             return View();
         }
         
