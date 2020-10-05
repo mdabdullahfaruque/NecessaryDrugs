@@ -152,7 +152,7 @@ namespace NecessaryDrugs.Web.Controllers
                     {
                         new MailMessage
                         {
-                            Body=$"<a href=\"{callbackUrl}\">Verify Email</a>",
+                            Body=callbackUrl,
                             Receiver=model.Email,
                             Sender="abdullahfaruquearman@gmail.com",
                             SenderName="Arman",
@@ -162,7 +162,7 @@ namespace NecessaryDrugs.Web.Controllers
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = model.Email, returnUrl = model.ReturnUrl });
+                        return RedirectToAction("Login","Account");
                     }
                     else
                     {
