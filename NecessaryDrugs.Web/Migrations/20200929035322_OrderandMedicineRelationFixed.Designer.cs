@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NecessaryDrugs.Core.Contexts;
 
 namespace NecessaryDrugs.Web.Migrations
 {
     [DbContext(typeof(MedicineStoreContext))]
-    partial class MedicineStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200929035322_OrderandMedicineRelationFixed")]
+    partial class OrderandMedicineRelationFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

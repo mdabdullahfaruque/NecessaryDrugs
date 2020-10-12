@@ -14,7 +14,6 @@ namespace NecessaryDrugs.Core.UnitOfWorks
         public IStockRepository StockRepository { get; set; }
         public IOrderRepository OrderRepository { get; set; }
         public IMedicineCategoryRepository MedicineCategoryRepository { get; set; }
-        public IPurchaseRepository PurchaseRepository { get; set; }
 
         public MedicineStoreUnitOfWork(string connectionString, string migrationAssemblyName)
             : base(connectionString, migrationAssemblyName)
@@ -24,7 +23,6 @@ namespace NecessaryDrugs.Core.UnitOfWorks
             MedicineCategoryRepository = new MedicineCategoryRepository(_dbContext);
             StockRepository = new StockRepository(_dbContext);
             OrderRepository = new OrderRepository(_dbContext);
-            PurchaseRepository = new PurchaseRepository(_dbContext);
         }
     }
 }

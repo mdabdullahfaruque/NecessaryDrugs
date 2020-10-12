@@ -21,7 +21,6 @@ namespace NecessaryDrugs.Core.Entities
         public Discount PriceDiscount { get; set; }
         public Stock Stock { get; set; }
         public IList<OrderItem> OrderedMedicines { get; set; }
-        public IList<PurchaseItem> PurchasedMedicines { get; set; }
         //public Order Order { get; set; }
         //public Purchase Purchase { get; set; }
     }

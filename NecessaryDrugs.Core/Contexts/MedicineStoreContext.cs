@@ -75,17 +75,6 @@ namespace NecessaryDrugs.Core.Contexts
                 .WithMany(o => o.OrderedMedicines)
                 .HasForeignKey(oi=>oi.MedicineId);
 
-            builder.Entity<PurchaseItem>()
-                .HasKey(pi => new { pi.MedicineId, pi.PurchaseId });
-            builder.Entity<PurchaseItem>()
-                .HasOne(pi => pi.Purchase)
-                .WithMany(o => o.PurchasedMedicines)
-                .HasForeignKey(pi => pi.PurchaseId);
-            builder.Entity<PurchaseItem>()
-                .HasOne(pi => pi.Medicine)
-                .WithMany(o => o.PurchasedMedicines)
-                .HasForeignKey(pi => pi.MedicineId);
-
             //builder.Entity<Purchase>()
             //    .HasMany(p => p.Medicines)
             //    .WithOne(m => m.Purchase);
@@ -120,7 +109,5 @@ namespace NecessaryDrugs.Core.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<PurchaseItem> PurchaseItems { get; set; }
     }
 }

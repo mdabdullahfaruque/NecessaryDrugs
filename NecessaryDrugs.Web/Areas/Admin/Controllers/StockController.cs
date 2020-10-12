@@ -29,18 +29,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             {
                 model.Load(id);
                 return View(model);
-            }
-                //{
-                //    var transactionModel = await _context.Transactions.FindAsync(id);
-                //    if (transactionModel == null)
-                //    {
-                //        return NotFound();
-                //    }
-                //    return View(transactionModel);
-                
+            }    
         }
         [HttpPost]
-        public IActionResult AddOrEdit(int id, /*[Bind("Id,MedicineId,Quantity,TotalPrice,Description")]*/ StockUpdateModel model)
+        public IActionResult AddOrEdit(int id,  StockUpdateModel model)
         {
             var viewModel = new StockViewModel();
             if (ModelState.IsValid)

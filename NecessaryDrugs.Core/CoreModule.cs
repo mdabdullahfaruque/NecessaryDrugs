@@ -44,8 +44,6 @@ namespace NecessaryDrugs.Core
                 .InstancePerLifetimeScope();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<PurchaseRepository>().As<IPurchaseRepository>()
-                .InstancePerLifetimeScope();
 
             //Services
             builder.RegisterType<CategoryService>().As<ICategoryService>()
@@ -55,8 +53,6 @@ namespace NecessaryDrugs.Core
             builder.RegisterType<StockService>().As<IStockService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<OrderService>().As<IOrderService>()
-                .InstancePerLifetimeScope();
-            builder.RegisterType<PurchaseService>().As<IPurchaseService>()
                 .InstancePerLifetimeScope();
 
             //UnitOfWorks
