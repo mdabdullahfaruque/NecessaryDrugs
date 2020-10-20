@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Project\\Necessary Drugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj": {}
+  },
+  "projects": {
+    "D:\\Project\\Necessary Drugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Project\\Necessary Drugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
+        "projectName": "NecessaryDrugs.Data",
+        "projectPath": "D:\\Project\\Necessary Drugs\\NecessaryDrugs\\NecessaryDrugs.Data\\NecessaryDrugs.Data.csproj",
+        "packagesPath": "C:\\Users\\Arman\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\Necessary Drugs\\NecessaryDrugs\\NecessaryDrugs.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Arman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "System.Linq.Dynamic.Core": {
+              "target": "Package",
+              "version": "[1.2.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
