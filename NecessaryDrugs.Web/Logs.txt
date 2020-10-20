@@ -1,5 +1,0 @@
-2020-10-05 16:21:50.768 +06:00 [INF] Starting up
-2020-10-05 16:21:58.738 +06:00 [INF] User logged in.
-2020-10-05 16:22:03.976 +06:00 [INF] User logged in.
-2020-10-05 16:23:40.881 +06:00 [INF] Starting up
-2020-10-05 16:24:32.664 +06:00 [INF] User created a new account with password.
