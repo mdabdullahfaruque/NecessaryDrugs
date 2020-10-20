@@ -19,5 +19,6 @@ namespace NecessaryDrugs.Core.Services
         void DeleteMedicine(int id);
         void EditMedicine(Medicine medicine);
         string GetDiscountAsString(Discount priceDiscount);
+        IEnumerable<Medicine> GetFilteredMedicine(string searchString);
     }
 }

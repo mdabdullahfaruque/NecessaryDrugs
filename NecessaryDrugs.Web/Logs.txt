@@ -3,3 +3,52 @@
 2020-10-05 16:22:03.976 +06:00 [INF] User logged in.
 2020-10-05 16:23:40.881 +06:00 [INF] Starting up
 2020-10-05 16:24:32.664 +06:00 [INF] User created a new account with password.
+2020-10-20 21:36:25.830 +06:00 [INF] Starting up
+2020-10-20 21:38:15.067 +06:00 [INF] User logged in.
+2020-10-20 21:54:39.497 +06:00 [INF] User logged in.
+2020-10-20 22:06:10.653 +06:00 [INF] Starting up
+2020-10-20 22:08:38.387 +06:00 [INF] Starting up
+2020-10-20 22:08:46.658 +06:00 [INF] User logged in.
+2020-10-20 22:09:33.135 +06:00 [INF] Starting up
+2020-10-20 22:34:31.989 +06:00 [INF] Starting up
+2020-10-20 22:34:43.849 +06:00 [INF] User logged in.
+2020-10-20 22:34:55.800 +06:00 [ERR] The view 'Search' was not found. Searched locations: ["/Areas/Client/Views/Medicine/Search.cshtml","/Areas/Client/Views/Shared/Search.cshtml","/Views/Shared/Search.cshtml","/Pages/Shared/Search.cshtml"]
+2020-10-20 22:34:55.849 +06:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view 'Search' was not found. The following locations were searched:
+/Areas/Client/Views/Medicine/Search.cshtml
+/Areas/Client/Views/Shared/Search.cshtml
+/Views/Shared/Search.cshtml
+/Pages/Shared/Search.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-10-20 22:48:49.852 +06:00 [INF] Starting up
+2020-10-20 22:49:02.287 +06:00 [INF] User logged in.
+2020-10-20 22:50:07.106 +06:00 [INF] Starting up
+2020-10-20 22:52:45.624 +06:00 [INF] Starting up
+2020-10-20 22:54:05.193 +06:00 [INF] Starting up
+2020-10-20 22:57:24.548 +06:00 [INF] Starting up
+2020-10-20 23:15:06.540 +06:00 [INF] Starting up
+2020-10-20 23:15:15.015 +06:00 [INF] User logged in.
+2020-10-20 23:17:09.793 +06:00 [INF] Starting up
+2020-10-20 23:22:36.212 +06:00 [INF] Starting up
+2020-10-20 23:22:45.165 +06:00 [INF] User logged in.
+2020-10-20 23:26:45.490 +06:00 [INF] Starting up

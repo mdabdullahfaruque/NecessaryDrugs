@@ -20,15 +20,28 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
         //}
         
 
-        public IActionResult Index(int? page)//Add page parameter
+        public IActionResult Index(int? page, string searchString)//Add page parameter
         {
             var model = new MedicineViewModel();
+            if (searchString != null)
+            {
+                TempData["SearchText"] = searchString;
+            }
+            else
+            {
+                TempData.Remove("SearchText");
+            }
             var pageNumber = page ?? 1; // if no page is specified, default to the first page (1)
-            int pageSize = 6; // Get 25 students for each requested page.
-            var onePageOfStudents = model.GetMedicines().ToPagedList(pageNumber, pageSize);
-            return View(onePageOfStudents); // Send 25 students to the page.
+            int pageSize = 6; // Get 6 medicines for each requested page.
+            var onePageOfStudents = (searchString==null)? model.GetMedicines().ToPagedList(pageNumber, pageSize) 
+                    : model.GetFilteredMedicines(searchString).ToPagedList(pageNumber, pageSize); ;
+            return View(onePageOfStudents); // Send 6 medicines to the page.
         }
-        
 
+        [HttpPost]
+        public IActionResult Search(string searchString)
+        {
+            return RedirectToAction("Index","Medicine",new { searchString });
+        }
     }
 }

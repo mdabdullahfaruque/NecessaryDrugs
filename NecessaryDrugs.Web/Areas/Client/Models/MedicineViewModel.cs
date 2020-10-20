@@ -12,26 +12,17 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
     {
         private IMedicineService _medicineService;
 
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public string Url { get; set; }
-
-        public double Price { get; set; }
-        public IList<MedicineImage> Images { get; set; }
-
-        public Discount PriceDiscount { get; set; }
         public MedicineViewModel()
         {
             _medicineService = Startup.AutofacContainer.Resolve<IMedicineService>();
         }
-        public MedicineViewModel(IMedicineService medicineService)
-        {
-            _medicineService = medicineService;
-        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public double Price { get; set; }
+        public IList<MedicineImage> Images { get; set; }
+        public Discount PriceDiscount { get; set; }
 
         internal IEnumerable<MedicineViewModel> GetMedicines()
         {
@@ -50,6 +41,25 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
             }
             return medicineModelList;
         }
+
+        internal IEnumerable<MedicineViewModel> GetFilteredMedicines(string searchString)
+        {
+            var allData = _medicineService.GetFilteredMedicine(searchString);
+            var medicineModelList = new List<MedicineViewModel>();
+            foreach (var medicine in allData)
+            {
+                var med = _medicineService.GetMedicine(medicine.Id);
+                medicineModelList.Add(new MedicineViewModel
+                {
+                    Id = med.Id,
+                    Name = med.Name,
+                    Url = med.Image.Url,
+                    Price = med.Price,
+                });
+            }
+            return medicineModelList;
+        }
+
         internal MedicineViewModel GetDetails(int id)
         {
             var medicine = _medicineService.GetMedicine(id);

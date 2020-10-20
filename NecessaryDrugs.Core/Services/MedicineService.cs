@@ -128,5 +128,9 @@ namespace NecessaryDrugs.Core.Services
             return _medicineStoreUnitOfWork.MedicineRepository.GetAll();
         }
 
+        public IEnumerable<Medicine> GetFilteredMedicine(string searchString)
+        {
+            return _medicineStoreUnitOfWork.MedicineRepository.Get(x => x.Name.Contains(searchString));
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿@using X.PagedList.Mvc.Core; <!--import to get HTML Helper-->
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList.Mvc.Core; <!--import to get HTML Helper-->
 @using X.PagedList;
 @model IEnumerable<NecessaryDrugs.Web.Areas.Client.Models.MedicineViewModel>
 
@@ -10,13 +11,19 @@
     <div class="card card-solid">
         <div class="card-body">
             <h1>Shop</h1>
+            <form asp-controller="Medicine" asp-action="Search">
+                <p class="text-right">
+                    <input asp-for=@TempData["SearchText"] type="text" name="SearchString" value=@TempData["SearchText"]>
+                    <input type="submit" value="Search" />
+                </p>
+            </form>
             <div class="row d-flex align-items-stretch">
 
                 @foreach (var item in Model)
                 {
                     <div class="col-sm-4 col-sm-4">
                         <div class="card bg-light mb-3">
-                            
+
                             <div class=" card-header text-secondary border-bottom-0">
                                 @item.Name
                             </div>
@@ -43,7 +50,7 @@
                 }
                 <div class="col-12">
                     <div align="center">
-                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page,searchString= @TempData["SearchText"] }),
                         new X.PagedList.Mvc.Core.Common.PagedListRenderOptions
                         {
                             DisplayItemSliceAndTotal = true,
