@@ -16,11 +16,11 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
     {
         IStockService _stockService;
         public int Id { get; set; }
-        [Required(ErrorMessage ="This field is required")]
-        public int MedicineId { get; set; }
-        public Medicine Medicine { get; set; }
         [Required(ErrorMessage = "This field is required")]
-        public IList<SelectListItem> Medicines { get; set; }
+        public int MedicineId { get; set; }
+        //public Medicine Medicine { get; set; }
+        //[Required(ErrorMessage = "This field is required")]
+        //public IList<SelectListItem> Medicines { get; set; }
         public int Quantity { get; set; }
         public double TotalPrice { get; set; }
         public string Description { get; set; }
