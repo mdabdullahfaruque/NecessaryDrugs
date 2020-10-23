@@ -23,6 +23,13 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
+                        <label asp-for="GenericName" class="control-label">Generic Name:</label>
+                        <input asp-for="GenericName" class="form-control" />
+                        <span asp-validation-for="GenericName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
                         <label asp-for="Description" class="control-label">Description:</label>
                         <textarea asp-for="Description" class="form-control" rows="3" placeholder="About the Medicine..."></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
@@ -38,19 +45,19 @@
                     </div>
                 </div>
                 @*<div class="col-md-12">
-                        @Html.LabelFor(x => Model.CategoriesId, htmlAttributes:
-                       new { @class = "control-label col-md-2" })
+            @Html.LabelFor(x => Model.CategoriesId, htmlAttributes:
+           new { @class = "control-label col-md-2" })
 
-                        @Html.DropDownListFor(x => Model.CategoriesId,
-                          new SelectList(Model.Categories, "Value", "Text"),
-                          htmlAttributes: new { @class = "form-control", id = "CategoriesId", @required = true })
-                        @Html.ValidationMessageFor(x => x.CategoriesId, "", new { @class = "text-danger" })
-                    </div>*@
+            @Html.DropDownListFor(x => Model.CategoriesId,
+              new SelectList(Model.Categories, "Value", "Text"),
+              htmlAttributes: new { @class = "form-control", id = "CategoriesId", @required = true })
+            @Html.ValidationMessageFor(x => x.CategoriesId, "", new { @class = "text-danger" })
+        </div>*@
                 @*<div class="col-md-12">
-                        @Html.DropDownListFor(x => Model.Categories2, new SelectList(Model.Categories, "Value", "Text"),
-                       htmlAttributes: new { @class = "form-control", id = "Category" })
-                        @Html.ValidationMessageFor(x => x.Categories2, "", new { @class = "text-danger" })
-                    </div>*@
+            @Html.DropDownListFor(x => Model.Categories2, new SelectList(Model.Categories, "Value", "Text"),
+           htmlAttributes: new { @class = "form-control", id = "Category" })
+            @Html.ValidationMessageFor(x => x.Categories2, "", new { @class = "text-danger" })
+        </div>*@
 
                 <div class="col-md-12">
                     <div class="form-group">

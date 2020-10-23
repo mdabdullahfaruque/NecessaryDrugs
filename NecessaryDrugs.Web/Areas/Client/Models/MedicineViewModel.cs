@@ -18,6 +18,7 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string GenericName { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
         public double Price { get; set; }
@@ -35,7 +36,8 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
                 {
                     Id = med.Id,
                     Name = med.Name,
-                    Url=med.Image.Url,
+                    GenericName = med.GenericName,
+                    Url =med.Image.Url,
                     Price = med.Price,
                 });
             }
@@ -53,6 +55,7 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
                 {
                     Id = med.Id,
                     Name = med.Name,
+                    GenericName = med.GenericName,
                     Url = med.Image.Url,
                     Price = med.Price,
                 });
@@ -65,6 +68,7 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
             var medicine = _medicineService.GetMedicine(id);
             Id = medicine.Id;
             Name = medicine.Name;
+            GenericName = medicine.GenericName;
             Url = medicine.Image.Url;
             Description = medicine.Description;
             Price = medicine.Price;

@@ -17,6 +17,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        public string GenericName { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
@@ -65,6 +66,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 var medicine = new Medicine
                 {
                     Name = Name,
+                    GenericName= GenericName,
                     Description = Description,
                     Image = new MedicineImage { Url = Url },
                     Price = Price,
@@ -95,6 +97,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             {
                 Id = medicine.Id;
                 Name = medicine.Name;
+                GenericName = medicine.GenericName;
                 Description = medicine.Description;
                 Price = medicine.Price;
                 Url = medicine.Image.Url;
@@ -119,6 +122,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 {
                     Id=Id,
                     Name = Name,
+                    GenericName= GenericName,
                     Description = Description,
                     Image = new MedicineImage { Url = Url },
                     Price = Price,

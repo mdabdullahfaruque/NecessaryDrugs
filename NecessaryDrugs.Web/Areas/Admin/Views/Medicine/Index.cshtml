@@ -20,6 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>GenericName</th>
                                     <th>Image</th>
                                     <th width="30%">Description</th>
                                     <th>Categories</th>
@@ -31,6 +32,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Name</th>
+                                    <th>GenericName</th>
                                     <th>Image</th>
                                     <th>Description</th>
                                     <th>Categories</th>
@@ -95,23 +97,23 @@
                         className: "text-center"
                     },
                     {
-                        "orderable": false,
                         "targets": 1,
+                        className: "text-center"
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 2,
                         "render": function (data, type, row) {
-                            return "<img src='/admin/img/" + row[1] + "' style='height:100px; width:200px;'>";
+                            return "<img src='/admin/img/" + row[2] + "' style='height:100px; width:200px;'>";
                         },
                         className: "text-center"
                     },
                     {
-                        "targets": 2,
-                        className: "text-center"
-                    },
-                    {
-                        "orderable": false,
                         "targets": 3,
                         className: "text-center"
                     },
                     {
+                        "orderable": false,
                         "targets": 4,
                         className: "text-center"
                     },
@@ -120,8 +122,12 @@
                         className: "text-center"
                     },
                     {
-                        "orderable": false,
                         "targets": 6,
+                        className: "text-center"
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 7,
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/medicine/edit/${data}'" value='${data}'>
                                             <i class="fas fa-pencil-alt">

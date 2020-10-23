@@ -15,6 +15,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public string GenericName { get; set; }
 
         public string Description { get; set; }
 
@@ -36,7 +37,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
-                tableModel.GetSortText(new string[] { "Name","Image", "Description","Categories", "Price", "PriceDiscount.Amount" ,"Action"}));
+                tableModel.GetSortText(new string[] { "Name", "GenericName", "Image", "Description","Categories", "Price", "PriceDiscount.Amount" ,"Action"}));
             return new
             {
                 recordsTotal = data.total,
@@ -45,6 +46,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                         select new string[]
                         {
                             record.Name,
+                            record.GenericName,
                             record.Image.Url,
                             record.Description,
                             _medicineService.GetCategoryListAsStringForAMedicine(record.Categories),

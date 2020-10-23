@@ -102,6 +102,7 @@ namespace NecessaryDrugs.Core.Services
         {
             var oldMedicine= GetMedicine(medicine.Id);
             oldMedicine.Name = medicine.Name;
+            oldMedicine.GenericName = medicine.GenericName;
             oldMedicine.Description = medicine.Description;
             oldMedicine.Price = medicine.Price;
             oldMedicine.PriceDiscount = medicine.PriceDiscount;
