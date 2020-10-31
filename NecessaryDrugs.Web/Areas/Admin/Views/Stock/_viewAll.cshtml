@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                <a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",null,Context.Request.Scheme)','New Stock')" class="btn btn-success text-white"><i class="fas fa-random"></i> Add New Stock</a>
+                @*<a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",null,Context.Request.Scheme)','New Stock')" class="btn btn-success text-white"><i class="fas fa-random"></i> Add New Stock</a>*@
                 @*<button type="submit" onclick="showInPopup('@Url.Action("AddOrEdit","Stock",null,Context.Request.Scheme)','New Stock')" class="btn btn-success text-white">New Stock</button>*@
                 @*<a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",null,Context.Request.Scheme)','New Stock')" class="btn btn-success text-white"><i class="fas fa-random"></i> New Stock</a>*@
             </th>
@@ -41,14 +41,14 @@
                 </td>
                 <td>
                     <div>
-                        <a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",new {id=item.Id},Context.Request.Scheme)','Update')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",new {id=item.Id},Context.Request.Scheme)','Update')" class="btn btn-info text-white"><i class="fas fa-plus"></i> Add Stock</a>
                         @*<a onclick="showInPopup('@Url.Action("AddOrEdit","Stock",null,Context.Request.Scheme)','New Stock')"
                            class="btn btn-success text-white"><i class="fas fa-random"></i> New Stock</a>
                         <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",new {id=item.TransactionId},Context.Request.Scheme)','Update Transaction')" 
                            class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>*@
-                        <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                        @*<form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
                             <input type="submit" value="Delete" class="btn btn-danger" />
-                        </form>
+                        </form>*@
                     </div>
                 </td>
             </tr>
