@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
+using NecessaryDrugs.Web.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NecessaryDrugs.Web.Areas.Client.Models
 {
-    public class MedicineViewModel
+    public class MedicineViewModel : BaseModel
     {
         private IMedicineService _medicineService;
 

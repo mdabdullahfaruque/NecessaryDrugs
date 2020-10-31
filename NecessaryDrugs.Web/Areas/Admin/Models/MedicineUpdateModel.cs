@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
+using NecessaryDrugs.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

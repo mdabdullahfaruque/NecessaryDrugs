@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Identity;
 using NecessaryDrugs.Core.Entities;
+using NecessaryDrugs.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

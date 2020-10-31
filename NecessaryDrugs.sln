@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NecessaryDrugs.Data", "Nece
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NecessaryDrugs.Core", "NecessaryDrugs.Core\NecessaryDrugs.Core.csproj", "{D4B16059-8B44-435F-9D21-DD054609F290}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3AF06CD0-876E-46D4-A99A-E55350AE4175}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecessaryDrugs.Core.Test", "NecessaryDrugs.Core.Test\NecessaryDrugs.Core.Test.csproj", "{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{D4B16059-8B44-435F-9D21-DD054609F290}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B16059-8B44-435F-9D21-DD054609F290}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B16059-8B44-435F-9D21-DD054609F290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2EE46955-C4F7-47F5-857B-58ED1EE2BA02} = {3774B117-8C1B-441F-B377-7303D4CFC3E0}
 		{D4B16059-8B44-435F-9D21-DD054609F290} = {3774B117-8C1B-441F-B377-7303D4CFC3E0}
+		{EA9C8FC7-12FB-49BF-968E-DC1DC5C09BF7} = {3AF06CD0-876E-46D4-A99A-E55350AE4175}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12BB5B91-F457-4E9A-8548-01EECE185918}

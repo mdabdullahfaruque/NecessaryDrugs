@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Web.Areas.Client.Models;
+using NecessaryDrugs.Web.Models;
 using Newtonsoft.Json;
 
 namespace NecessaryDrugs.Web.Areas.Client.Controllers
@@ -21,50 +22,64 @@ namespace NecessaryDrugs.Web.Areas.Client.Controllers
             _userManager = userManager;
         }
         List<CartModel> list = new List<CartModel>();
-        public IActionResult AddToCart(int id)
+        public IActionResult AddToCart(int id,bool? failed)
         {
             var model = new MedicineViewModel();
             model.GetDetails(id);
+            if (failed == true)
+            {
+                model.Notification = new NotificationModel("Failed!",
+                    "Requested quantity is greater then available quantity.",
+                    Notificationtype.Fail);
+            }
             return View(model);
         }
         [HttpPost]
         public IActionResult AddToCart(int id, int quantity)
         {
             var model = new CartModel();
+            var viewModel = new MedicineViewModel();
             var cart = model.AddToCart(id, quantity);
             List<CartModel> list2 = null;
-            if (TempData["cart"] == null)
+            if (cart == null)
             {
-                list.Add(cart);
-                TempData["cart"] = JsonConvert.SerializeObject(list);
-                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                //list2 = ViewData["cart"] as List<CartModel>;
+                return RedirectToAction("AddToCart", "Cart",new { id=id, failed = true });
             }
             else
             {
-                list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
-                //list2 = ViewData["cart"] as List<CartModel>;
-                int flag = 0;
-                foreach (var item in list2)
+                if (TempData["cart"] == null)
                 {
-                    if (item.MedicineId == cart.MedicineId)
+                    list.Add(cart);
+                    TempData["cart"] = JsonConvert.SerializeObject(list);
+                    list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                    //list2 = ViewData["cart"] as List<CartModel>;
+                }
+                else
+                {
+                    list2 = JsonConvert.DeserializeObject<List<CartModel>>(TempData["cart"] as string);
+                    //list2 = ViewData["cart"] as List<CartModel>;
+                    int flag = 0;
+                    foreach (var item in list2)
                     {
-                        item.Quantity += cart.Quantity;
-                        item.TotalPrice += cart.TotalPrice;
-                        flag = 1;
-                    }
+                        if (item.MedicineId == cart.MedicineId)
+                        {
+                            item.Quantity += cart.Quantity;
+                            item.TotalPrice += cart.TotalPrice;
+                            flag = 1;
+                        }
 
+                    }
+                    if (flag == 0)
+                    {
+                        list2.Add(cart);
+                        //new item
+                    }
+                    TempData["cart"] = JsonConvert.SerializeObject(list2);
                 }
-                if (flag == 0)
-                {
-                    list2.Add(cart);
-                    //new item
-                }
-                TempData["cart"] = JsonConvert.SerializeObject(list2);
+                TempData["item_count"] = JsonConvert.SerializeObject(list2.Count);
+                TempData.Keep();
+                return RedirectToAction("Index", "Medicine");
             }
-            TempData["item_count"] = JsonConvert.SerializeObject(list2.Count);
-            TempData.Keep();
-            return RedirectToAction("Index","Medicine");
         }
         public IActionResult DelTempData()
         {

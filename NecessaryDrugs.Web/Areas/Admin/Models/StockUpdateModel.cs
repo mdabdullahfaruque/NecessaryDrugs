@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
+using NecessaryDrugs.Web.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;

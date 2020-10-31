@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Razor.Language;
 using NecessaryDrugs.Core.Entities;
 using NecessaryDrugs.Core.Services;
+using NecessaryDrugs.Web.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NecessaryDrugs.Web.Areas.Client.Models
 {
-    public class CartModel
+    public class CartModel : BaseModel
     {
         IOrderService _orderService;
         public CartModel()
@@ -56,19 +57,29 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
             cheque
         }
         public string PaymentTransactionID { get; set; }
+        public MedicineViewModel MedicineViewmodel { get; private set; }
+
         internal CartModel AddToCart(int id, int quantity)
         {
             Medicine medicine = _orderService.GetMedicine(id);
-            var cart = new CartModel();
-            cart.MedicineId = id;
-            cart.MedName = medicine.Name;
-            cart.MedImgUrl = medicine.Image.Url;
-            cart.UnitPrice = medicine.Price;
-            cart.Quantity = quantity;
-            cart.TotalPrice = cart.UnitPrice * cart.Quantity;
-            cart.Orderdate = DateTime.Now;
+            int availableQuantity = _orderService.GetAvailableQuantity(id);
+            if (quantity > availableQuantity)
+            {
+                return null;
+            }
+            else
+            {
+                var cart = new CartModel();
+                cart.MedicineId = id;
+                cart.MedName = medicine.Name;
+                cart.MedImgUrl = medicine.Image.Url;
+                cart.UnitPrice = medicine.Price;
+                cart.Quantity = quantity;
+                cart.TotalPrice = cart.UnitPrice * cart.Quantity;
+                cart.Orderdate = DateTime.Now;
 
-            return cart;
+                return cart;
+            }
         }
 
         internal void AddOrder(InvoiceModel model, string totalBill, List<CartModel> list)
@@ -83,7 +94,8 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
                     medList.Add(new OrderItem
                     {
                         MedicineId = medicine.Id
-                    }) ;
+                    });
+                    _orderService.UpdateMedicineStock(item.MedicineId,item.Quantity);
                     quantityListAsString += item.Quantity + " ";
                 }
                 _orderService.AddAnOrder(new Order
