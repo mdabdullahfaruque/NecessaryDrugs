@@ -41,8 +41,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             if (stock != null)
             {
                 Id = stock.Id;
-                MedicineId = stock.MedicineId;
-                //Quantity = stock.Quantity;
                 Description = stock.Description;
             }
         }
@@ -89,6 +87,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 var oldStock = _stockService.GetStock(id);
                 oldStock.Quantity += Quantity;
                 oldStock.Description = Description;
+                _stockService.EditStock(oldStock);
                 Notification = new NotificationModel("Success!",
                     "Stock added successfully.",
                     Notificationtype.Success);

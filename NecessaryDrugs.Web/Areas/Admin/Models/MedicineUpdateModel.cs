@@ -70,6 +70,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                     GenericName= GenericName,
                     Description = Description,
                     Image = new MedicineImage { Url = Url },
+                    Stock=new Stock { Quantity=0},
                     Price = Price,
                     PriceDiscount = Discount
                 };
