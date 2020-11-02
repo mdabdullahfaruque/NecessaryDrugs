@@ -12,5 +12,7 @@ namespace NecessaryDrugs.Core.Services
         object GetAllStocks();
         int GetAvailableQuantity(int id);
         void UpdateMedicineStock(int medicineId, int quantity);
+        IList<Order> GetAllOrders();
+        void DeleteOrder(int id);
     }
 }

@@ -87,16 +87,14 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
             if (list != null)
             {
                 var medList = new List<OrderItem>();
-                string quantityListAsString = null;
                 foreach (var item in list)
                 {
-                    var medicine = _orderService.GetMedicine(item.MedicineId);
                     medList.Add(new OrderItem
                     {
-                        MedicineId = medicine.Id
+                        MedicineId = item.MedicineId,
+                        Quantity= item.Quantity
                     });
                     _orderService.UpdateMedicineStock(item.MedicineId,item.Quantity);
-                    quantityListAsString += item.Quantity + " ";
                 }
                 _orderService.AddAnOrder(new Order
                 {
@@ -106,7 +104,6 @@ namespace NecessaryDrugs.Web.Areas.Client.Models
                     PaymentType = model.PaymentType,
                     DeliveryStatus = "Pending",
                     OrderedMedicines = medList,
-                    QuantitiesListAsString = quantityListAsString,
                     Orderdate = DateTime.Now,
                     TotalPrice = Convert.ToDouble(totalBill)
                 }); ;

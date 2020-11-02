@@ -44,20 +44,6 @@ namespace NecessaryDrugs.Web.Areas.Admin.Controllers
             var users = await model.GetUsers();
             return View(users);
         }
-       
-        // POST: Transaction/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string id)
-        {
-            var model = new UserModel();
-            model.Delete(id);
-            return RedirectToAction("Index");
-            //Note: After clicking delete, the operation will be done, but the page will not be refreshed.
-
-            //return Json(new { html = Helper<UserController>.RenderRazorViewToString(this, "Index", model.GetUsers() ) });
-            //return Json(new { html = Helper<UserController>.RenderRazorViewToString(this, "Index", model.GetUsers()) });
-        }
 
         [HttpGet]
         public async Task<IActionResult> Manageroles(string userId)

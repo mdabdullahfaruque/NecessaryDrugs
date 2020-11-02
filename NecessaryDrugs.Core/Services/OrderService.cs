@@ -2,6 +2,7 @@
 using NecessaryDrugs.Core.UnitOfWorks;
 using System;
 using System.Collections.Generic;
+using System.Linq.Dynamic.Core;
 using System.Text;
 
 namespace NecessaryDrugs.Core.Services
@@ -18,6 +19,17 @@ namespace NecessaryDrugs.Core.Services
         {
             _medicineStoreUnitOfWork.OrderRepository.Add(order);
             _medicineStoreUnitOfWork.Save();
+        }
+
+        public void DeleteOrder(int id)
+        {
+            _medicineStoreUnitOfWork.OrderRepository.Remove(id);
+            _medicineStoreUnitOfWork.Save();
+        }
+
+        public IList<Order> GetAllOrders()
+        {
+            return _medicineStoreUnitOfWork.OrderRepository.Get(null, y => y.OrderBy("Orderdate"), "OrderedMedicines", true);
         }
 
         public object GetAllStocks()

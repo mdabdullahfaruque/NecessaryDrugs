@@ -24,9 +24,6 @@
             <th>
                 Roles Management
             </th>
-            <th>
-                Action
-            </th>
         </tr>
     </thead>
     <tfoot>
@@ -45,9 +42,6 @@
             </th>
             <th>
                 Roles Management
-            </th>
-            <th>
-                Action
             </th>
         </tr>
     </tfoot>
@@ -73,12 +67,6 @@
                         Manage Roles
                     </a>
                 </td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
-
-                        <input type="submit" value="Delete" class="btn btn-danger" />
-                    </form>
-                </td>
             </tr>
         }
     </tbody>
@@ -92,33 +80,5 @@
             $('#clueTable tbody').sortable().disableSelection();
         });
     </script>
-    <script>
-        jQueryAjaxDelete = form => {
-            if (confirm('Are you sure to delete this record ?')) {
-                try {
-                    $.ajax({
-                        type: 'POST',
-                        url: form.action,
-                        data: new FormData(form),
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            $('#view-all').html(res.html);
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        }
-                    })
-                } catch (ex) {
-                    console.log(ex)
-                }
-            }
-
-            //prevent default form submit event
-            return false;
-        }
-
-</script>
-    
 }
 
