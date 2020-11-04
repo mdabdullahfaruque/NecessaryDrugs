@@ -45,7 +45,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                 foreach (var med in item.OrderedMedicines)
                 {
                     var medicine = _orderService.GetMedicine(med.MedicineId);
-                    orderItems = ", "+medicine.Name + " * " + med.Quantity;
+                    orderItems += ", "+medicine.Name + " * " + med.Quantity;
                 }
                 modelList.Add(new OrderModel
                 {

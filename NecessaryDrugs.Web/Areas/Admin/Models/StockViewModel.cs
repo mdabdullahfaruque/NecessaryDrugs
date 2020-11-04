@@ -39,7 +39,7 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
                     Id = stock.Id,
                     MedicineName = medicine.Name,
                     Quantity = stock.Quantity,
-                    TotalPrice = stock.TotalPrice,
+                    TotalPrice = stock.Quantity*medicine.Price,
                     Description = stock.Description
                 });
             }

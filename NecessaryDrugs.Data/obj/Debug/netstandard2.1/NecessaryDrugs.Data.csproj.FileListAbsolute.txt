@@ -1,6 +1,7 @@
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.1\NecessaryDrugs.Data.deps.json
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.1\NecessaryDrugs.Data.dll
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\bin\Debug\netstandard2.1\NecessaryDrugs.Data.pdb
+D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.1\NecessaryDrugs.Data.csprojAssemblyReference.cache
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.1\NecessaryDrugs.Data.AssemblyInfoInputs.cache
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.1\NecessaryDrugs.Data.AssemblyInfo.cs
 D:\Project\Necessary Drugs\NecessaryDrugs\NecessaryDrugs.Data\obj\Debug\netstandard2.1\NecessaryDrugs.Data.csproj.CoreCompileInputs.cache

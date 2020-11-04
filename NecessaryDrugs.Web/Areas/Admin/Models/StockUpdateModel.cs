@@ -85,8 +85,10 @@ namespace NecessaryDrugs.Web.Areas.Admin.Models
             try
             {
                 var oldStock = _stockService.GetStock(id);
+                Medicine medicine = _stockService.GetMedicine(oldStock.MedicineId);
                 oldStock.Quantity += Quantity;
                 oldStock.Description = Description;
+                oldStock.TotalPrice = oldStock.Quantity * medicine.Price;
                 _stockService.EditStock(oldStock);
                 Notification = new NotificationModel("Success!",
                     "Stock added successfully.",

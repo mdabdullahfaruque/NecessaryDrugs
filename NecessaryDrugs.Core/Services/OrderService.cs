@@ -39,7 +39,8 @@ namespace NecessaryDrugs.Core.Services
 
         public int GetAvailableQuantity(int id)
         {
-            var medicineStock=_medicineStoreUnitOfWork.StockRepository.GetById(id);
+            var medicine = _medicineStoreUnitOfWork.MedicineRepository.GetByIdWithIncludeProperty(x => x.Id.Equals(id), "Stock");
+            var medicineStock=_medicineStoreUnitOfWork.StockRepository.GetById(medicine.Stock.Id);
             return medicineStock.Quantity;
         }
 
